@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code. A short planning chain, an AI-workflow guide, and a structure grounded in six context types.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vibe.asskildt.eu/">
+  <meta property="og:title" content="vibe-coding-template — plan before you vibe-code">
+  <meta property="og:description"
+    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code.">
+  <meta property="og:image" content="https://vibe.asskildt.eu/favicon.png">
+  <meta property="og:image:alt" content="vibe-coding-template logo.">
+  <meta property="og:site_name" content="vibe-coding-template">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:url" content="https://vibe.asskildt.eu/">
+  <meta property="twitter:title" content="vibe-coding-template — plan before you vibe-code">
+  <meta property="twitter:description"
+    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code.">
+  <meta property="twitter:image" content="https://vibe.asskildt.eu/favicon.png">
+  <meta property="twitter:image:alt" content="vibe-coding-template logo.">
+
+  <title>vibe-coding-template — plan before you vibe-code</title>
+  <link rel="canonical" href="https://vibe.asskildt.eu/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet">
+
+  <!-- No-flash theme: apply the stored (or system) theme before first paint. -->
+  <script>
+    (function () {
+      var c = localStorage.getItem('theme') || 'system';
+      var t = c === 'system'
+        ? (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light')
+        : c;
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- Structured data (JSON-LD). SoftwareSourceCode fits a code template better than
+       WebSite/Article — the page is about a reusable code artifact, not an editorial piece. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "vibe-coding-template",
+    "description": "A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code.",
+    "codeRepository": "https://github.com/Asskildt/vibe-coding-template",
+    "url": "https://vibe.asskildt.eu/",
+    "programmingLanguage": "Markdown",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": {
+      "@type": "Person",
+      "name": "M. Asskildt",
+      "url": "https://asskildt.eu/"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <style>
+    :root {
+      --teal: #30AABD;
+      --teal-accent: #0E5674;
+      --ink: #0b0f14;
+      --ink-2: #1a2129;
+      --muted: #56626c;
+      --bg: #ffffff;
+      --line: #0b0f14;
+      --line-soft: #d7dde1;
+      --hero-bg: #0b0f14;
+      --hero-fg: #f2f5f7;
+      --code-bg: #eef2f4;
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --teal: #46c3d6;
+      --teal-accent: #7fd8e5;
+      --ink: #e8edf1;
+      --ink-2: #c3ccd3;
+      --muted: #8a97a1;
+      --bg: #0b0f14;
+      --line: #e8edf1;
+      --line-soft: #29323b;
+      --hero-bg: #05080b;
+      --hero-fg: #f2f5f7;
+      --code-bg: #161d24;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--ink);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .mono {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    /* Hero — flat, dark, left-aligned. No gradient, no rounding. */
+    header.hero {
+      background: var(--hero-bg);
+      color: var(--hero-fg);
+      border-bottom: 3px solid var(--teal);
+    }
+
+    .hero-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 3rem;
+    }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .eyebrow img {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 6.5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 1rem;
+      max-width: 15ch;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: #aeb9c1;
+      max-width: 46ch;
+      margin: 0 0 2rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--teal);
+      color: #05242a;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.7rem 1.3rem;
+      border: 0;
+      transition: background 0.12s ease;
+    }
+
+    .cta:hover {
+      background: #46c3d6;
+    }
+
+    main .cta {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    main .cta:hover {
+      background: var(--teal-accent);
+      color: #05242a;
+    }
+
+    [data-theme="dark"] main .cta {
+      background: var(--teal);
+      color: #05242a;
+    }
+
+    /* Sections — numbered, with a hard rule above each. */
+    main section {
+      padding: 2.75rem 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    main section:first-child {
+      border-top: 0;
+      padding-top: 3rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 1.1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+
+    h2::before {
+      content: attr(data-n);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--teal-accent);
+    }
+
+    p {
+      margin: 0 0 1rem;
+      max-width: 62ch;
+    }
+
+    code {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      color: var(--ink);
+      padding: 0.08em 0.34em;
+      border: 1px solid var(--line-soft);
+    }
+
+    /* Hero sits on a dark surface in both themes, so code inside it needs its own
+       light-on-dark treatment rather than the body's dark-on-light. */
+    .hero code {
+      background: rgba(255, 255, 255, 0.1);
+      color: #eaf6f8;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Context-type grid — sharp cells, hairline dividers. */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      border: 1px solid var(--line);
+      margin: 1.4rem 0;
+    }
+
+    .grid .item {
+      padding: 1.1rem 1.15rem;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .grid .item strong {
+      display: block;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .grid .item span {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* Chain — square index markers, monospace. */
+    ol.chain {
+      margin: 1.4rem 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    ol.chain li {
+      counter-increment: step;
+      position: relative;
+      padding: 0.7rem 0 0.7rem 3rem;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    ol.chain li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--ink);
+      width: 1.9rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    ol.chain li strong {
+      color: var(--ink);
+    }
+
+    footer {
+      padding: 2.25rem 0 3.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 3px solid var(--ink);
+      margin-top: 1rem;
+    }
+
+    footer .mono {
+      letter-spacing: 0.02em;
+    }
+
+    footer a {
+      color: var(--ink);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-row .mono {
+      margin: 0;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line-soft);
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.12s ease, color 0.12s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .theme-toggle svg {
+      display: block;
+    }
+
+    /* Mobile — tighten spacing, let the grid collapse to one column. */
+    @media (max-width: 600px) {
+      .hero-inner {
+        padding: 2.5rem 1.25rem 2.25rem;
+      }
+
+      .wrap {
+        padding: 0 1.25rem;
+      }
+
+      main section {
+        padding: 2.25rem 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-row {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Keyboard focus — a sharp visible ring, matching the design. Keyboard-only
+       users need this the way the CTA needs a hover state. */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    /* Respect reduced-motion preferences. */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">
+        <img src="favicon.svg" alt="vibe-coding-template logo" width="26" height="26">
+        <span>vibe-coding-template</span>
+      </div>
+      <h1>Plan before you vibe-code</h1>
+      <p class="tagline">A tool-agnostic <code>AGENTS.md</code> template. Set up the context an AI
+        agent needs, and think through the project, before you write code.</p>
+      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub &rarr;</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2 data-n="01">What it is</h2>
+      <p>A lot of AI coding breaks down before the first prompt. The goal is fuzzy, there are no
+        shared conventions, and nothing records why past choices were made. This template is where
+        you settle those things first.</p>
+      <p>It gives the agent context to work from instead of guessing, and gives you a short planning
+        chain to run before any code exists. Small enough project? Skip the chain. It says so.</p>
+    </section>
+
+    <section>
+      <h2 data-n="02">Six context types</h2>
+      <p>Every piece of context has one home, so nothing gets lost or duplicated.</p>
+      <div class="grid">
+        <div class="item"><strong>Instructions</strong><span><code>AGENTS.md</code>. Always loaded,
+            kept short.</span></div>
+        <div class="item"><strong>Knowledge</strong><span><code>docs/</code>. Loaded when a task
+            needs it.</span></div>
+        <div class="item"><strong>Memory</strong><span>ADRs. Why a choice was made.</span></div>
+        <div class="item"><strong>Examples</strong><span>Real code from the project, not
+            invented.</span></div>
+        <div class="item"><strong>Tools</strong><span>MCP and API definitions, plus when to use
+            them.</span></div>
+        <div class="item"><strong>Guardrails</strong><span>Hooks, lint rules, the security
+            section.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-n="03">The planning chain</h2>
+      <p>Six short documents, filled in order before coding starts. Roughly ten minutes each. If the
+        project is small enough, the chain tells you to skip it and start coding.</p>
+      <ol class="chain">
+        <li><strong>Brief.</strong> What we're building, for whom, why now.</li>
+        <li><strong>Stack decision.</strong> A set of questions to answer, not a fixed answer.</li>
+        <li><strong>Architecture sketch.</strong> Rough, and expected to change.</li>
+        <li><strong>Extension points.</strong> Growth you expect, without building for it yet.</li>
+        <li><strong>Milestones.</strong> Build order, and what waits.</li>
+        <li><strong>Deploy strategy.</strong> Where the code lands.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 data-n="04">Get it</h2>
+      <p>Copy the files into a new project, or use the repository as a GitHub template. Start with
+        <code>docs/planning/README.md</code>. It tells you when to run the chain and when to skip
+        it. All of it is <a
+          href="https://github.com/Asskildt/vibe-coding-template/blob/main/LICENSE">MIT
+          licensed</a>.</p>
+      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub &rarr;</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <p class="mono">Built at <a href="https://asskildt.eu/">asskildt.eu</a> &nbsp;/&nbsp;
+        <a href="https://github.com/Asskildt/vibe-coding-template">GitHub</a> &nbsp;/&nbsp; MIT
+        &nbsp;/&nbsp; 2026</p>
+      <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch theme">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14" aria-hidden="true">
+          <path fill="currentColor"
+            d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.8 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.4 94.8c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.5 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.8-47.4c12.8-6.4 12.8-24.6 0-31zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z" />
+        </svg>
+        <span class="theme-label">System</span>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var storageKey = 'theme';
+      var cycle = ['system', 'light', 'dark'];
+      var labels = { system: 'System', light: 'Light', dark: 'Dark' };
+      var toggle = document.querySelector('.theme-toggle');
+      var label = toggle.querySelector('.theme-label');
+
+      function systemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function apply(choice) {
+        var effective = choice === 'system' ? systemTheme() : choice;
+        document.documentElement.setAttribute('data-theme', effective);
+        localStorage.setItem(storageKey, choice);
+        label.textContent = labels[choice];
+      }
+
+      apply(localStorage.getItem(storageKey) || 'system');
+
+      toggle.addEventListener('click', function () {
+        var current = localStorage.getItem(storageKey) || 'system';
+        apply(cycle[(cycle.indexOf(current) + 1) % cycle.length]);
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+        if ((localStorage.getItem(storageKey) || 'system') === 'system') apply('system');
+      });
+    })();
+  </script>
+</body>
+
+</html>

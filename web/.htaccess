@@ -1,0 +1,4 @@
+# Apache config for vibe.asskildt.eu (Domeneshop web hosting).
+# This folder is the document root for the subdomain; /404.html is relative to it.
+
+ErrorDocument 404 /404.html
