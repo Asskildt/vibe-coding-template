@@ -83,6 +83,10 @@ registered migrations, etc. These cost hours if they aren't written down.}
 
 ## Directory Structure
 
+> This is an *example* layout for the project you're building — replace it with your real one. For
+> the template's *own* files (this guide, `docs/`, `.agent/`), see the References section at the
+> bottom; that's the map of what's actually here.
+
 {Show the actual structure with one line of explanation per folder. Keep it readable on one screen.}
 
 ```
@@ -316,8 +320,9 @@ A task is done when all of this holds — not before:
 
 ## References
 
-{Links to the most important docs files, with one line about what each contains. Loaded on
-demand, not part of this file — see rule 13.}
+This is the map of the template's own files — the authoritative, up-to-date index of what's here
+and where. Each is loaded on demand, not part of this file (see rule 13). {As you add or remove
+docs, keep this list current; it's the one place that's meant to stay complete.}
 
 **Before building (planning phase — see the threshold in `docs/planning/README.md`):**
 
