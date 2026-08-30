@@ -93,6 +93,25 @@ agent parsing the page without rendering it at all.
 This list is the floor, not a full audit. For anything beyond it, a real WCAG or Lighthouse pass is
 the right tool, not a hand-maintained checklist.
 
+## Links: new tab or same tab
+
+Opening external links in a new tab is a UX/product choice, not an accessibility best practice — the
+accepted guidance (WCAG 3.2.5, an AAA criterion) only asks that you *warn* the user, not that you do
+it. So decide it deliberately:
+
+**Open in a new tab when the user is likely not done with your site — not by a blanket rule.** A
+link that continues their journey elsewhere (a linked repo they'll return from, a reference doc)
+reasonably opens in a new tab; a link that's the whole point of the visit doesn't need to bring them
+back. If you do open in a new tab, pair `target="_blank"` with `rel="noopener"` (security) and warn
+before the click — a visible external-link icon for sighted users, an `aria-label` mentioning "opens
+in a new tab" for screen readers. Neither cue alone covers both audiences.
+
+**Worked example (this template's landing page):** every link funnels the visitor toward one
+destination — the GitHub repo. There's nothing here to return to, so its links stay in the same tab.
+The cue is a plain external-link icon on the primary calls to action, signalling "this leaves the
+site", with no forced new-tab behavior. Same-tab is the browser's expected default, so it needs no
+extra markup.
+
 ## Avoid AI Tells
 
 Check a UI change against these before shipping. They're the patterns that recur across generated

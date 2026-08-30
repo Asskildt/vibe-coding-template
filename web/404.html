@@ -2,69 +2,164 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#070B1D" />
-    <meta name="robots" content="noindex" />
-    <title>404 — vibe.asskildt.eu</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>404 — vibe.asskildt.eu</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet">
 
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-            color: #E8EEF7;
-            background: linear-gradient(180deg, #070B1D 0%, #27376E 100%);
-        }
+  <!-- No-flash theme: apply the stored (or system) theme before first paint. Same as index.html. -->
+  <script>
+    (function () {
+      var c = localStorage.getItem('theme') || 'system';
+      var t = c === 'system'
+        ? (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light')
+        : c;
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
-        .code {
-            font-size: clamp(4.5rem, 22vw, 10rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: 0.02em;
-            color: #30AABD;
-        }
+  <style>
+    :root {
+      --teal: #30AABD;
+      --ink: #0b0f14;
+      --muted: #56626c;
+      --bg: #ffffff;
+      --line-soft: #d7dde1;
+      color-scheme: light;
+    }
 
-        .label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            opacity: 0.7;
-            margin: 1.25rem 0 2.5rem;
-        }
+    [data-theme="dark"] {
+      --teal: #46c3d6;
+      --ink: #e8edf1;
+      --muted: #8a97a1;
+      --bg: #0b0f14;
+      --line-soft: #29323b;
+      color-scheme: dark;
+    }
 
-        .home {
-            display: inline-block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #E8EEF7;
-            text-decoration: none;
-            border: 1px solid rgba(232, 238, 247, 0.3);
-            border-radius: 999px;
-            padding: 0.75rem 1.75rem;
-            transition: border-color 0.15s, background 0.15s;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .home:hover {
-            border-color: #30AABD;
-            background: rgba(48, 170, 189, 0.12);
-        }
-    </style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 30rem;
+    }
+
+    .code {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: clamp(3.5rem, 18vw, 7rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--teal);
+      margin: 0;
+    }
+
+    .label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      margin: 1rem 0 0.75rem;
+    }
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--bg);
+      background: var(--ink);
+      text-decoration: none;
+      padding: 0.7rem 1.3rem;
+      border: 0;
+      transition: background 0.12s ease;
+    }
+
+    .home:hover {
+      background: var(--teal);
+      color: #05242a;
+    }
+
+    .home--ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-soft);
+    }
+
+    .home--ghost:hover {
+      background: transparent;
+      color: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .home svg {
+      width: 1em;
+      height: 1em;
+      display: block;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 0 0 2rem;
+      max-width: 32ch;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div>
-        <div class="code">404</div>
-        <p class="label">Page not found</p>
-        <a href="/" class="home">&larr; Back home</a>
+  <main>
+    <p class="code">404</p>
+    <h1 class="label">Page not found</h1>
+    <p class="lead">No route matches this URL.</p>
+    <div class="actions">
+      <a href="/" class="home">&larr; Back home</a>
+      <a href="https://github.com/Asskildt/vibe-coding-template" class="home home--ghost">GitHub
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9" />
+        </svg></a>
     </div>
+  </main>
 </body>
 
 </html>

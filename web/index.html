@@ -210,6 +210,15 @@
       color: #05242a;
     }
 
+    /* External-link icon — signals "this leaves the site". Links stay in the same tab
+       (the whole page funnels outward, so there's nothing here to return to); the icon
+       is the cue instead of forced new-tab behavior. See docs/design.md. */
+    .cta svg {
+      width: 1em;
+      height: 1em;
+      display: block;
+    }
+
     /* Sections — numbered, with a hard rule above each. */
     main section {
       padding: 2.75rem 0;
@@ -430,7 +439,11 @@
       <h1>Plan before you vibe-code</h1>
       <p class="tagline">A tool-agnostic <code>AGENTS.md</code> template. Set up the context an AI
         agent needs, and think through the project, before you write code.</p>
-      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub &rarr;</a>
+      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9" />
+        </svg></a>
     </div>
   </header>
 
@@ -483,7 +496,11 @@
         it. All of it is <a
           href="https://github.com/Asskildt/vibe-coding-template/blob/main/LICENSE">MIT
           licensed</a>.</p>
-      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub &rarr;</a>
+      <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9" />
+        </svg></a>
     </section>
   </main>
 
