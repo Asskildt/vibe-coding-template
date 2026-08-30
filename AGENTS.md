@@ -336,10 +336,11 @@ demand, not part of this file — see rule 13.}
 - `docs/data-model.md` — entities, relations, invariants
 - `docs/api-reference.md` — OpenAPI spec or generated docs
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator
+- `docs/design.md` — this project's design system + a checklist for avoiding AI tells in UI
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
 
 **Reusable context (tool support varies — see `.agent/README.md`):**
 
-- `.agent/skills/` — procedural knowledge loaded only when a task matches
+- `.agent/skills/` — procedural knowledge loaded only when a task matches; see `.agent/skills/README.md` for what a skill *is*
 - `.agent/examples/` — real patterns copied from the codebase, not invented ideal code

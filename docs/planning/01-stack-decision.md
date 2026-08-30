@@ -28,6 +28,24 @@ from a favourite framework.
    conventions. A stack the agent handles well is a force multiplier for this whole template.
 6. **Ecosystem maturity for this domain.** Payments, PDF generation, real-time, geo, whatever your
    domain leans on — is there a mature, maintained library, or would you be building primitives?
+7. **UI surface and design tooling.** Answer only if there's a real user-facing UI — for an API,
+   CLI, or script, skip this one.
+   - Is visual quality something users actually judge the project on, or is "functional and
+     consistent" enough (an internal admin panel vs a product or landing page people meet)?
+   - Is the UI work ongoing or a one-off? A dependency pays off through repetition. One landing
+     page rarely needs its own tool; a product built over months might.
+   - Is there a documented design system already, or is the agent the only thing standing between
+     "nothing specified" and generic AI defaults?
+   - Will it support light/dark/system themes? The recommended default is yes — see the theme
+     section in `docs/design.md`. If you skip it, that's a decision to record here.
+
+   **Default:** start with the "Avoid AI Tells" checklist in `docs/design.md` — it's free and needs
+   no dependency. Consider adopting a dedicated design tool (e.g.
+   [Impeccable](https://impeccable.style), a cross-tool skill that runs a deterministic version of
+   that checklist against a `DESIGN.md`/tokens file) only if UI work is ongoing *and* the checklist
+   isn't keeping up manually — concrete threshold: you check against it more than once a week, or
+   you keep hitting the same tell across sessions. Adopting it is a dependency decision like any
+   other (rule 7), not a default inclusion.
 
 ## Decision (write as an ADR)
 
