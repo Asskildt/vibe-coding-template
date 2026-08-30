@@ -29,6 +29,12 @@ Write a skill when a task is all three of:
 If it's none of these — a one-off, or something you'd *explain* rather than *do* — it belongs in
 `docs/`, not here. Don't pre-write skills for tasks you haven't actually done twice.
 
+**Is the skills folder even worth it yet?** The three-stage loading below pays off once you have
+enough procedures that reading them all at once gets unwieldy. As a rule of thumb, under five or six
+procedures, a single file in `docs/` (or one per procedure under `docs/`) is simpler than this
+machinery — and if your tool doesn't auto-load skills, a `docs/` procedure is all you'd get anyway.
+Reach for `.agent/skills/` when the count grows past that, not before.
+
 ## How loading works
 
 A skill loads in three stages, so the agent isn't carrying full instructions for every skill at all

@@ -36,6 +36,11 @@ compiles, existing tests are green, no new lint errors, docs touched are updated
 behind. A phase is not "done" because the code exists — it's done when a test or runnable command
 proves it.
 
+> **Milestones vs a living roadmap.** This file is planning *before* — a frozen build order. Once
+> the project is in flight, ongoing steering (what's next, what's parked, loose ideas) is a
+> different, living document. Add a `docs/roadmap.md` for that when you're actually running the
+> project and this frozen list no longer reflects reality — not now.
+
 ---
 
 Next: **[05-deploy-strategy.md](05-deploy-strategy.md)** — where the code lands once it's built.

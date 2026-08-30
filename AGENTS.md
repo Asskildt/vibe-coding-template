@@ -225,7 +225,10 @@ language-model tics. Check for these (examples in Norwegian, since that's the us
 - **Decorative emoji** in running text.
 - **Over-explaining:** the same point twice with slightly different words.
 
-Does not apply to code comments.
+**Scope:** this is about text a *user or visitor* reads — UI copy, generated content, and
+public-facing docs like the repo `README` and a landing page. It does not apply to code comments,
+and it does not police internal docs like this file or `docs/*` (an em dash in dense technical prose
+is fine there). The line is credibility with an audience, not mechanical purity.
 
 ---
 
@@ -286,6 +289,27 @@ A task is done when all of this holds — not before:
 
 ---
 
+## Files: Free to Edit vs Sign-Off Required
+
+Rule 11 covers irreversible *actions*; this covers protected *artifacts*. Some files are settled
+decisions, not open questions — a signed-off design spec, an approved logo, legal or contractual
+text. The agent edits them only after asking. Everything else is fair game. List the real ones so
+the boundary is greppable, not guessed.
+
+**Needs sign-off before editing:**
+
+- {`docs/design.md` — the approved design spec}
+- {`assets/logo.svg` — approved logo (a color swap via CSS vars is fine; the mark's form is not)}
+- {legal / contractual / compliance copy}
+
+**Free to edit:**
+
+- {source under `src/` — following the rules above}
+- {`docs/**` — documentation and procedures}
+- {tests, config, templates}
+
+---
+
 ## Traps
 
 > Things that cost hours if you don't know about them. Fill in the real ones as they surface —
@@ -322,7 +346,9 @@ A task is done when all of this holds — not before:
 
 This is the map of the template's own files — the authoritative, up-to-date index of what's here
 and where. Each is loaded on demand, not part of this file (see rule 13). {As you add or remove
-docs, keep this list current; it's the one place that's meant to stay complete.}
+docs, keep this list current; it's the one place that's meant to stay complete. Once `docs/` grows
+past six to eight files or gains subfolders, add a local `docs/README.md` table of contents that
+lives next to the files — until then, this section is enough.}
 
 **Before building (planning phase — see the threshold in `docs/planning/README.md`):**
 
