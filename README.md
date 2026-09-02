@@ -29,6 +29,36 @@ The layout is a direct expression of six context types (Instructions, Knowledge,
 Tools, Guardrails). The reasoning and its source are recorded in
 [`docs/decisions/0001-context-engineering-source.md`](docs/decisions/0001-context-engineering-source.md).
 
+## Start here
+
+The fastest path is to hand one of these to your coding agent. Both point it at this repo so it
+reads the conventions at the source.
+
+**New project:**
+
+```text
+I want to start a new project (roughly: what it is). Use
+github.com/Asskildt/vibe-coding-template as the framework. Copy its files in, then read
+AGENTS.md and docs/planning/README.md. Before any code, ask me what you need to understand
+the project: the goal, who it's for, the constraints. Decide with me whether it needs the
+planning chain (it has a skip-it threshold). Walk me through the planning one step at a time
+instead of guessing, then fill in the AGENTS.md placeholders. Don't start building until
+we've agreed on the plan.
+```
+
+**Existing project:**
+
+```text
+I have an existing project and want to adopt the conventions from
+github.com/Asskildt/vibe-coding-template where they fit. First read the conventions there,
+at least AGENTS.md, docs/design.md, docs/ai-workflow.md, and docs/planning/README.md. Then
+read my project properly: not just the top-level files, but the real structure, the main
+modules, config, and any existing docs, so your read is grounded in how it actually works.
+Then talk it through with me: propose which conventions are worth adopting and which don't
+fit, and whether to copy files in or just borrow ideas. Don't change anything until we've
+agreed.
+```
+
 ## How to use it
 
 1. **Copy the files** into your new project (or use this repo as a GitHub template).
@@ -64,4 +94,6 @@ notice if you redistribute it. © 2026 M. Asskildt, asskildt.eu
 
 ---
 
-Landing page: <https://vibe.asskildt.eu>
+Landing page: <https://vibe.asskildt.eu>. It lives in `web/`, which is this repo's own site rather
+than part of the template. Don't copy it into your project, though it does serve as a worked example
+of the theme and accessibility baselines in [`docs/design.md`](docs/design.md).

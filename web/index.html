@@ -5,27 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code. A short planning chain, an AI-workflow guide, and a structure grounded in six context types.">
+    content="An AGENTS.md template for context engineering and planning before you vibe-code. Plain Markdown, nothing to install, works with any coding agent.">
+  <meta name="author" content="M. Asskildt">
+  <meta name="theme-color" content="#0b0f14">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vibe.asskildt.eu/">
   <meta property="og:title" content="vibe-coding-template — plan before you vibe-code">
   <meta property="og:description"
-    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code.">
-  <meta property="og:image" content="https://vibe.asskildt.eu/favicon.png">
-  <meta property="og:image:alt" content="vibe-coding-template logo.">
+    content="An AGENTS.md template and a short planning chain. Give your coding agent real context to work from, and settle the decisions worth making before the first line of code.">
+  <meta property="og:image" content="https://vibe.asskildt.eu/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="vibe-coding-template: plan before you vibe-code.">
   <meta property="og:site_name" content="vibe-coding-template">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary">
-  <meta property="twitter:url" content="https://vibe.asskildt.eu/">
-  <meta property="twitter:title" content="vibe-coding-template — plan before you vibe-code">
-  <meta property="twitter:description"
-    content="A tool-agnostic AGENTS.md template for context engineering and planning before you vibe-code.">
-  <meta property="twitter:image" content="https://vibe.asskildt.eu/favicon.png">
-  <meta property="twitter:image:alt" content="vibe-coding-template logo.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://vibe.asskildt.eu/">
+  <meta name="twitter:title" content="vibe-coding-template — plan before you vibe-code">
+  <meta name="twitter:description"
+    content="An AGENTS.md template and a short planning chain. Give your coding agent real context to work from, before the first line of code.">
+  <meta name="twitter:image" content="https://vibe.asskildt.eu/og-image.png">
+  <meta name="twitter:image:alt" content="vibe-coding-template: plan before you vibe-code.">
 
   <title>vibe-coding-template — plan before you vibe-code</title>
   <link rel="canonical" href="https://vibe.asskildt.eu/">
@@ -60,6 +65,7 @@
     "codeRepository": "https://github.com/Asskildt/vibe-coding-template",
     "url": "https://vibe.asskildt.eu/",
     "programmingLanguage": "Markdown",
+    "keywords": "AGENTS.md, context engineering, vibe coding, AI coding agent, project planning, ADR",
     "license": "https://opensource.org/licenses/MIT",
     "author": {
       "@type": "Person",
@@ -240,7 +246,7 @@
       gap: 0.7rem;
     }
 
-    h2::before {
+    h2[data-n]::before {
       content: attr(data-n);
       font-family: "JetBrains Mono", ui-monospace, monospace;
       font-size: 0.8rem;
@@ -251,6 +257,24 @@
     p {
       margin: 0 0 1rem;
       max-width: 62ch;
+    }
+
+    ul.why {
+      list-style: none;
+      margin: 1.25rem 0 0;
+      padding: 0;
+    }
+
+    ul.why li {
+      padding: 0.7rem 0 0.7rem 1.1rem;
+      border-left: 2px solid var(--teal);
+      margin-bottom: 0.6rem;
+      max-width: 62ch;
+      color: var(--muted);
+    }
+
+    ul.why li strong {
+      color: var(--ink);
     }
 
     code {
@@ -297,6 +321,103 @@
     .grid .item span {
       font-size: 0.92rem;
       color: var(--muted);
+    }
+
+    /* Prompt blocks — copyable, sharp, monospace body. */
+    .prompt {
+      border: 1px solid var(--line);
+      margin: 1.25rem 0;
+    }
+
+    .prompt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .prompt-label {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .copy {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line-soft);
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      transition: border-color 0.12s ease, color 0.12s ease;
+    }
+
+    .copy:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .copy.copied {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .prompt-body {
+      position: relative;
+    }
+
+    .prompt pre {
+      margin: 0;
+      padding: 0.9rem 0.95rem;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--ink);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 5.5rem;
+      overflow: hidden;
+    }
+
+    .prompt.open pre {
+      max-height: none;
+    }
+
+    /* Fade at the bottom of a collapsed prompt, hinting there's more. */
+    .prompt:not(.open) .prompt-body::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2.5rem;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    .prompt-expand {
+      display: block;
+      width: 100%;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-top: 1px solid var(--line-soft);
+      padding: 0.55rem;
+      cursor: pointer;
+      transition: color 0.12s ease;
+    }
+
+    .prompt-expand:hover {
+      color: var(--teal);
     }
 
     /* Chain — square index markers, monospace. */
@@ -437,8 +558,9 @@
         <span>vibe-coding-template</span>
       </div>
       <h1>Plan before you vibe-code</h1>
-      <p class="tagline">A tool-agnostic <code>AGENTS.md</code> template. Set up the context an AI
-        agent needs, and think through the project, before you write code.</p>
+      <p class="tagline">An <code>AGENTS.md</code> template and a short planning chain. Give your
+        coding agent real context to work from, and settle the decisions worth making before the
+        first line of code.</p>
       <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -448,18 +570,55 @@
   </header>
 
   <main class="wrap">
+    <section class="section-prompts">
+      <h2>Start here</h2>
+      <p>Try it with the prompts below, from scratch or on an existing project.</p>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label">New project</span>
+          <button class="copy" type="button" data-copy="p-new">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-new">I want to start a new project (roughly: what it is). Use github.com/Asskildt/vibe-coding-template as the framework. Copy its files in, then read AGENTS.md and docs/planning/README.md. Before any code, ask me what you need to understand the project: the goal, who it's for, the constraints. Decide with me whether it needs the planning chain (it has a skip-it threshold). Walk me through the planning one step at a time instead of guessing, then fill in the AGENTS.md placeholders. Don't start building until we've agreed on the plan.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label">Existing project</span>
+          <button class="copy" type="button" data-copy="p-existing">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-existing">I have an existing project and want to adopt the conventions from github.com/Asskildt/vibe-coding-template where they fit. First read the conventions there, at least AGENTS.md, docs/design.md, docs/ai-workflow.md, and docs/planning/README.md. Then read my project properly: not just the top-level files, but the real structure, the main modules, config, and any existing docs, so your read is grounded in how it actually works. Then talk it through with me: propose which conventions are worth adopting and which don't fit, and whether to copy files in or just borrow ideas. Don't change anything until we've agreed.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false">Expand</button>
+      </div>
+    </section>
+
     <section>
       <h2 data-n="01">What it is</h2>
-      <p>A lot of AI coding breaks down before the first prompt. The goal is fuzzy, there are no
-        shared conventions, and nothing records why past choices were made. This template is where
-        you settle those things first.</p>
-      <p>It gives the agent context to work from instead of guessing, and gives you a short planning
-        chain to run before any code exists. Small enough project? Skip the chain. It says so.</p>
+      <p>Good results come from planning the work and keeping the codebase tidy, so the agent can
+        navigate it and grasp how the system fits together. On bigger projects it also needs to know
+        what you're building before it starts, or you burn expensive tokens on code that gets
+        rewritten. The bigger the project, the more this pays off.</p>
+      <p>What you get is plain Markdown: a short <code>AGENTS.md</code> holding the rules that apply
+        everywhere, a planning chain for the decisions worth making up front, decision records, and
+        checklists for design, accessibility and AI workflow. Nothing to install, no dependencies,
+        and it works with whichever agent you already use.</p>
+      <ul class="why">
+        <li>The agent works from real context, not guesses, so there's less to undo.</li>
+        <li>Decisions get written down once, not re-argued three sessions later.</li>
+        <li>The always-loaded core stays short, so unused context costs you nothing.</li>
+      </ul>
     </section>
 
     <section>
       <h2 data-n="02">Six context types</h2>
-      <p>Every piece of context has one home, so nothing gets lost or duplicated.</p>
+      <p>Every piece of context has one home, so nothing gets lost or duplicated. The six types come
+        from Google's 2026 report on agentic engineering, and the repo records that source in a
+        decision record rather than leaving it as folklore.</p>
       <div class="grid">
         <div class="item"><strong>Instructions</strong><span><code>AGENTS.md</code>. Always loaded,
             kept short.</span></div>
@@ -477,8 +636,8 @@
 
     <section>
       <h2 data-n="03">The planning chain</h2>
-      <p>Six short documents, filled in order before coding starts. Roughly ten minutes each. If the
-        project is small enough, the chain tells you to skip it and start coding.</p>
+      <p>Six short documents, filled in order before coding starts, about ten minutes each. Small
+        project? The chain tells you to skip it.</p>
       <ol class="chain">
         <li><strong>Brief.</strong> What we're building, for whom, why now.</li>
         <li><strong>Stack decision.</strong> A set of questions to answer, not a fixed answer.</li>
@@ -491,9 +650,9 @@
 
     <section>
       <h2 data-n="04">Get it</h2>
-      <p>Copy the files into a new project, or use the repository as a GitHub template. Start with
-        <code>docs/planning/README.md</code>. It tells you when to run the chain and when to skip
-        it. All of it is <a
+      <p>Copy the files in, or use the repo as a GitHub template. Start with
+        <code>docs/planning/README.md</code>: it tells you when to run the chain and when to skip
+        it. Everything is <a
           href="https://github.com/Asskildt/vibe-coding-template/blob/main/LICENSE">MIT
           licensed</a>.</p>
       <a class="cta" href="https://github.com/Asskildt/vibe-coding-template">View on GitHub
@@ -547,6 +706,50 @@
 
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
         if ((localStorage.getItem(storageKey) || 'system') === 'system') apply('system');
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.prompt-expand').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var prompt = btn.closest('.prompt');
+          var open = prompt.classList.toggle('open');
+          btn.textContent = open ? 'Collapse' : 'Expand';
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      document.querySelectorAll('.copy').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var pre = document.getElementById(btn.getAttribute('data-copy'));
+          if (!pre) return;
+          var text = pre.textContent;
+          function done() {
+            var original = btn.textContent;
+            btn.textContent = 'Copied';
+            btn.classList.add('copied');
+            setTimeout(function () {
+              btn.textContent = original;
+              btn.classList.remove('copied');
+            }, 1600);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(fallback);
+          } else {
+            fallback();
+          }
+          function fallback() {
+            var r = document.createRange();
+            r.selectNodeContents(pre);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(r);
+            try { document.execCommand('copy'); done(); } catch (e) { /* no-op */ }
+            sel.removeAllRanges();
+          }
+        });
       });
     })();
   </script>
