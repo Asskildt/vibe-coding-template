@@ -72,6 +72,10 @@ Two ways to work, and the choice depends on how well-defined the task is.
 The decision rule: **if you can write down the acceptance criteria completely before it starts,
 orchestrate. If the criteria only become clear as you go, conduct.**
 
+**State the scope in the request, either way.** Agents read vague verbs at their widest: "improve
+this" can become a rewrite. Say which level you mean: fix errors, tighten, or rewrite; fix the bug,
+or clean up the module.
+
 ## Verification threshold
 
 Ties directly to the Definition of Done in `AGENTS.md`. One addition specific to model routing:

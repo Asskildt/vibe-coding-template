@@ -1,6 +1,6 @@
 # Skill: migrate the database
 
-> **Example skill — replace with your real one or delete.** Shows the shape: exact steps, the order,
+> **Example skill — fill in for your project, or delete it and its line under "Read on Demand" in `AGENTS.md`.** Shows the shape: exact steps, the order,
 > and the traps that cost hours if unknown. Delete the `{...}` placeholders once filled.
 
 ## When to use

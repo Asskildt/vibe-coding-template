@@ -27,9 +27,9 @@ The framing comes from a report read directly (primary source, not a summary of 
   same section.
 
 **Verified:** 2026-08-30, read directly against the primary source (the uploaded PDF, `Day_1_v3.pdf`),
-pp. 15–16 — not against an AI-generated summary, per the "Source Requirements for Factual Claims"
-rule in `AGENTS.md`. Title, authors, and the May 2026 date were cross-checked against the public
-Kaggle listing.
+pp. 15–16 — not against an AI-generated summary, per the `verify-sources` skill
+(`.agent/skills/verify-sources/SKILL.md`). Title, authors, and the May 2026 date were
+cross-checked against the public Kaggle listing.
 
 ## Decision
 

@@ -14,9 +14,10 @@ any code exists, scaled so a weekend script can skip it entirely.
 
 | File / folder | What it is |
 |---------------|-----------|
-| **`AGENTS.md`** | The always-loaded core: working rules, code style, performance and security rules. Kept deliberately short, so everything else loads on demand. |
+| **`AGENTS.md`** | The always-loaded core: working rules, code style, writing and security rules. Kept deliberately short, so everything else loads on demand. |
 | **`docs/planning/`** | A 6-step planning chain (brief → stack → architecture → extension points → milestones → deploy), run *before* coding. Has a skip-it exit for small projects. |
 | **`docs/decisions/`** | ADRs: the long-term memory of *why* a choice was made, so it isn't re-litigated later. |
+| **`docs/backend.md`** | Performance, state and API-error rules, read before writing code that hits a database, renders lists or defines API responses. |
 | **`docs/ai-workflow.md`** | How to work with the agent: model routing by capability class, token economy, when to drive step-by-step vs hand off a whole task. |
 | **`.agent/`** | Reusable context: `skills/` (procedural knowledge, loaded on demand) and `examples/` (real code from the project). |
 | **`.github/PULL_REQUEST_TEMPLATE.md`** | A PR checklist that keeps docs in sync. The one mechanism that stops context from rotting. |
@@ -78,8 +79,9 @@ agreed.
   Everything else loads on demand. Tokens aren't free.
 - **Describe the decision, not the fleeting answer.** Stack, deploy target, and model choices are
   written as decision frameworks, not fixed answers that rot.
-- **Tool-agnostic by default.** `AGENTS.md` is becoming a de-facto standard, and thin pointer files
-  (`CLAUDE.md`, etc.) can point back to it. Skills support varies by tool, see
+- **Tool-agnostic by default.** `AGENTS.md` is the single source. Codex reads it natively;
+  `CLAUDE.md` and `GEMINI.md` import it with `@AGENTS.md`. Check that it actually loads: `/context`
+  in Claude Code, `/memory show` in Gemini CLI. Skills support varies by tool, see
   [`.agent/README.md`](.agent/README.md).
 
 ## Language

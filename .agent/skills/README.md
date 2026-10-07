@@ -66,9 +66,10 @@ order, the traps. Link out to `docs/` for background rather than restating it.
 **[`migrate-database/SKILL.md`](migrate-database/SKILL.md) is the reference example for structure.**
 Read it to see the shape a skill takes: name, when-to-use trigger, steps, traps, verify.
 
-**It is also a placeholder for content, not a fixed inventory.** There are no other skills here
-yet. Replace or delete it once you have a real, recurring task worth capturing — don't treat it as
-the one skill this template ships with. It's an example of the *pattern*, not a starter kit.
+**It is also a placeholder for content, not a fixed inventory.** Replace or delete it once you have
+a real, recurring task worth capturing. It's an example of the *pattern*, not a starter kit.
+[`verify-sources/SKILL.md`](verify-sources/SKILL.md) is the template's one general-purpose skill;
+delete it if the project publishes no factual claims.
 
 ## A note on tool support
 
