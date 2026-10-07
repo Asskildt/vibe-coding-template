@@ -1,4 +1,4 @@
-# vibe-coding-template
+# Vibe Coding Template
 
 > An AGENTS.md template and a short planning chain for giving coding agents real context before the first line of code. Plain Markdown, nothing to install, works with any coding agent.
 

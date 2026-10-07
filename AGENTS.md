@@ -139,7 +139,7 @@ Components rendered in lists receive data as props, they don't fetch it themselv
 Moved out of this file (rule 13). Read the file when the task matches:
 
 - Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (performance rules, state and immutability, agent-navigable errors).
-- Before building or changing UI or public pages: `docs/design.md` (design system, accessibility and agent-readable UI, machine-readable content).
+- Before building or changing UI or public pages: `docs/design.md` (design system, accessibility and agent-readable UI, machine-readable content, SEO and sharing).
 - Before changing the database schema: `.agent/skills/migrate-database/SKILL.md` (steps and migration-pipeline traps). Only if the project has a database. The skill ships as an example: fill it in, or delete it together with this line.
 - Before putting a number, date, quote or named institution in a doc or on the site: `.agent/skills/verify-sources/SKILL.md`. Only for content-heavy or public projects.
 
@@ -287,7 +287,7 @@ of contents.}
 - `docs/data-model.md` — entities, relations, invariants
 - `docs/api-reference.md` — OpenAPI spec or generated docs
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
-- `docs/design.md` — this project's design system, accessibility and agent-readable UI, machine-readable content, AI-tells checklist
+- `docs/design.md` — this project's design system, accessibility and agent-readable UI, machine-readable content, SEO and sharing, AI-tells checklist
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
 

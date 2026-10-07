@@ -121,6 +121,24 @@ Applies to marketing pages, docs and articles. Not to app screens behind login.
 This list is the floor, not a full audit. For anything beyond it, a real WCAG or Lighthouse pass is
 the right tool, not a hand-maintained checklist.
 
+## SEO and sharing (public pages)
+
+Public pages only. App screens behind login get `noindex` or are simply not linked or listed. The
+canonical URL, `lang`, JSON-LD and server-rendered content are in the baseline above.
+- Title: unique per page, under about 60 characters, most specific phrase first, site name last.
+- Meta description: 150-160 characters, written for people, not keywords.
+- Open Graph and Twitter Card: `og:title`, `og:description`, `og:url`, `og:image`, `og:image:alt`,
+  and `twitter:card` set to `summary_large_image`. Image URLs are absolute. The image is
+  1200x630 with text that stays readable as a small thumbnail.
+- `sitemap.xml` lists canonical URLs only. `robots.txt` points to it with a `Sitemap:` line. Pages
+  that shouldn't be indexed (404, thank-you, internal) get `noindex` and stay out of the sitemap.
+- Use a display name for humans ("Acme Notes") and keep the slug for URLs and identifiers.
+- Before launch: paste the URL into a share preview or Open Graph debugger, validate the
+  structured data, submit the sitemap in the search engine's webmaster console (e.g. Google Search
+  Console), and check `curl -I` for 200 and the right content types.
+- Avoid keyword stuffing, the same title or description on every page, and a share image whose
+  text is unreadable at thumbnail size.
+
 ## Links: new tab or same tab
 
 Opening external links in a new tab is a UX/product choice, not an accessibility best practice — the

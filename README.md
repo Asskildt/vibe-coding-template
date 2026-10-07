@@ -1,4 +1,4 @@
-# vibe-coding-template
+# Vibe Coding Template
 
 A tool-agnostic `AGENTS.md` template for context engineering and planning before you vibe-code.
 
