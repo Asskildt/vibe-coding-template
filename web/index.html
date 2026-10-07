@@ -164,13 +164,35 @@
 
       <div class="prompt">
         <div class="prompt-head">
-          <span class="prompt-label" id="l-api">Agent-friendly APIs and UI</span>
+          <span class="prompt-label" id="l-api">Agent-friendly APIs</span>
           <button class="copy" type="button" data-copy="p-api" aria-describedby="l-api">Copy prompt</button>
         </div>
         <div class="prompt-body">
-          <pre id="p-api">I want my API and interface to be easy for AI agents to use, following github.com/Asskildt/vibe-coding-template. Read the section "AI-First: Make the System Navigable for Agents" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md and the section "Accessibility & machine-readability (baseline)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md. Then read how my API returns errors, paginates lists and formats dates, enums and IDs, and how my frontend exposes controls, accessible names, state and URLs. Show me where they differ from those rules, starting with error responses that don't tell the caller what to do next. Propose changes in order of impact. Don't change anything until we've agreed.</pre>
+          <pre id="p-api">I want my API to be easy for AI agents to use, following github.com/Asskildt/vibe-coding-template. Read the section "AI-First: Make the System Navigable for Agents" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md. Then read how my API actually returns errors, paginates lists and formats dates, enums and IDs. Show me where it differs from those rules, starting with error responses that don't tell the caller what to do next. Propose changes in order of impact. Don't change anything until we've agreed.</pre>
         </div>
         <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-api" aria-describedby="l-api">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-ui">UI and accessibility</span>
+          <button class="copy" type="button" data-copy="p-ui" aria-describedby="l-ui">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-ui">I want to review my frontend against the design rules in github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md, mainly the sections "Your system (fill in — this is what the agent should match, not invent)", "Accessibility &amp; machine-readability (baseline)" and "Avoid AI Tells". Then read my actual UI code: styles, components and the main pages. Tell me whether I have a real design system or the agent is inventing one, and draft it from what the code already does if it's missing. Then list accessibility gaps and generic AI-looking patterns, worst first. Don't change anything until we've agreed.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-ui" aria-describedby="l-ui">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-seo">SEO and sharing</span>
+          <button class="copy" type="button" data-copy="p-seo" aria-describedby="l-seo">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-seo">I want my public pages to show up well in search and look right when shared, following github.com/Asskildt/vibe-coding-template. Read the section "SEO and sharing (public pages)" and the "Public, content-heavy pages" part of "Accessibility &amp; machine-readability (baseline)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md. Then check each public page: title, description, canonical URL, Open Graph tags and image, structured data, sitemap.xml, robots.txt and llms.txt. Leave pages behind login out. Give me a short table of what's missing or wrong per page, and propose fixes. Don't change anything until we've agreed.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-seo" aria-describedby="l-seo">Expand</button>
       </div>
     </section>
 

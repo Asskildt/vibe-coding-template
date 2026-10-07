@@ -6,7 +6,7 @@ The HTML page at https://vibe.asskildt.eu/ is canonical. The markdown version ha
 
 ## Page
 
-- [Landing page (markdown)](https://vibe.asskildt.eu/index.md): The page text and all six copyable prompts
+- [Landing page (markdown)](https://vibe.asskildt.eu/index.md): The page text and all eight copyable prompts
 
 ## Template files
 

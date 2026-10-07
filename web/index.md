@@ -46,10 +46,22 @@ I want the code discipline rules from github.com/Asskildt/vibe-coding-template. 
 I want the source-checking routine from github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/.agent/skills/verify-sources/SKILL.md. Add it to my project in the form my tool supports: a skill file if it has skills, otherwise a short section in my instruction file. Adapt the trigger to the kinds of claims my project publishes. Ask me before you add anything.
 ```
 
-#### Agent-friendly APIs and UI
+#### Agent-friendly APIs
 
 ```text
-I want my API and interface to be easy for AI agents to use, following github.com/Asskildt/vibe-coding-template. Read the section "AI-First: Make the System Navigable for Agents" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md and the section "Accessibility & machine-readability (baseline)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md. Then read how my API returns errors, paginates lists and formats dates, enums and IDs, and how my frontend exposes controls, accessible names, state and URLs. Show me where they differ from those rules, starting with error responses that don't tell the caller what to do next. Propose changes in order of impact. Don't change anything until we've agreed.
+I want my API to be easy for AI agents to use, following github.com/Asskildt/vibe-coding-template. Read the section "AI-First: Make the System Navigable for Agents" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md. Then read how my API actually returns errors, paginates lists and formats dates, enums and IDs. Show me where it differs from those rules, starting with error responses that don't tell the caller what to do next. Propose changes in order of impact. Don't change anything until we've agreed.
+```
+
+#### UI and accessibility
+
+```text
+I want to review my frontend against the design rules in github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md, mainly the sections "Your system (fill in — this is what the agent should match, not invent)", "Accessibility & machine-readability (baseline)" and "Avoid AI Tells". Then read my actual UI code: styles, components and the main pages. Tell me whether I have a real design system or the agent is inventing one, and draft it from what the code already does if it's missing. Then list accessibility gaps and generic AI-looking patterns, worst first. Don't change anything until we've agreed.
+```
+
+#### SEO and sharing
+
+```text
+I want my public pages to show up well in search and look right when shared, following github.com/Asskildt/vibe-coding-template. Read the section "SEO and sharing (public pages)" and the "Public, content-heavy pages" part of "Accessibility & machine-readability (baseline)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md. Then check each public page: title, description, canonical URL, Open Graph tags and image, structured data, sitemap.xml, robots.txt and llms.txt. Leave pages behind login out. Give me a short table of what's missing or wrong per page, and propose fixes. Don't change anything until we've agreed.
 ```
 
 ## 01 What it is
