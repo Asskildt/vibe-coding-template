@@ -1,8 +1,8 @@
 # Backend Rules — Performance, Data & Agent-Navigable APIs
 
 > Moved out of `AGENTS.md` (rule 13). Read it before writing code that hits a database, renders
-> lists, or defines API responses and errors. Mostly backend, but the list-fetching and state rules
-> apply to the frontend too. Adapt to the stack; delete what doesn't apply.
+> lists, or defines API responses and errors. The list-fetching and state rules apply to the
+> frontend too. Adapt to the stack; delete what doesn't apply.
 
 ---
 
@@ -77,3 +77,5 @@ Markdown everywhere. Complete OpenAPI spec available in one call. Examples in ev
 ### Agent Identity and Traceability
 Actions performed by an agent are traceable (`createdByAgentId`, a separate marker in the audit log).
 An agent never performs an irreversible action without an explicitly configured autonomy level — the default is "suggest".
+
+The UI side of agent-navigability (accessible controls, state in the URL, `llms.txt`, markdown versions) lives in `design.md`, under "Accessibility & machine-readability (baseline)".

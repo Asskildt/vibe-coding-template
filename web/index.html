@@ -34,6 +34,7 @@
 
   <title>vibe-coding-template — plan before you vibe-code</title>
   <link rel="canonical" href="https://vibe.asskildt.eu/">
+  <link rel="alternate" type="text/markdown" href="/index.md">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="sitemap" type="application/xml" href="sitemap.xml">
@@ -76,478 +77,7 @@
   }
   </script>
 
-  <style>
-    :root {
-      --teal: #30AABD;
-      --teal-accent: #0E5674;
-      --ink: #0b0f14;
-      --ink-2: #1a2129;
-      --muted: #56626c;
-      --bg: #ffffff;
-      --line: #0b0f14;
-      --line-soft: #d7dde1;
-      --hero-bg: #0b0f14;
-      --hero-fg: #f2f5f7;
-      --code-bg: #eef2f4;
-      color-scheme: light;
-    }
-
-    [data-theme="dark"] {
-      --teal: #46c3d6;
-      --teal-accent: #7fd8e5;
-      --ink: #e8edf1;
-      --ink-2: #c3ccd3;
-      --muted: #8a97a1;
-      --bg: #0b0f14;
-      --line: #e8edf1;
-      --line-soft: #29323b;
-      --hero-bg: #05080b;
-      --hero-fg: #f2f5f7;
-      --code-bg: #161d24;
-      color-scheme: dark;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Inter", system-ui, -apple-system, sans-serif;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: var(--ink);
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
-    }
-
-    .wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .mono {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-    }
-
-    /* Hero — flat, dark, left-aligned. No gradient, no rounding. */
-    header.hero {
-      background: var(--hero-bg);
-      color: var(--hero-fg);
-      border-bottom: 3px solid var(--teal);
-    }
-
-    .hero-inner {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem 3rem;
-    }
-
-    .eyebrow {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--teal);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .eyebrow img {
-      width: 26px;
-      height: 26px;
-      display: block;
-    }
-
-    h1 {
-      font-size: clamp(2.1rem, 6.5vw, 3.4rem);
-      font-weight: 600;
-      line-height: 1.04;
-      letter-spacing: -0.02em;
-      margin: 0 0 1rem;
-      max-width: 15ch;
-    }
-
-    .tagline {
-      font-size: clamp(1rem, 2.2vw, 1.2rem);
-      color: #aeb9c1;
-      max-width: 46ch;
-      margin: 0 0 2rem;
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      background: var(--teal);
-      color: #05242a;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.7rem 1.3rem;
-      border: 0;
-      transition: background 0.12s ease;
-    }
-
-    .cta:hover {
-      background: #46c3d6;
-    }
-
-    main .cta {
-      background: var(--ink);
-      color: var(--bg);
-    }
-
-    main .cta:hover {
-      background: var(--teal-accent);
-      color: #05242a;
-    }
-
-    [data-theme="dark"] main .cta {
-      background: var(--teal);
-      color: #05242a;
-    }
-
-    /* External-link icon — signals "this leaves the site". Links stay in the same tab
-       (the whole page funnels outward, so there's nothing here to return to); the icon
-       is the cue instead of forced new-tab behavior. See docs/design.md. */
-    .cta svg {
-      width: 1em;
-      height: 1em;
-      display: block;
-    }
-
-    /* Sections — numbered, with a hard rule above each. */
-    main section {
-      padding: 2.75rem 0;
-      border-top: 1px solid var(--line-soft);
-    }
-
-    main section:first-child {
-      border-top: 0;
-      padding-top: 3rem;
-    }
-
-    h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin: 0 0 1.1rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.7rem;
-    }
-
-    h2[data-n]::before {
-      content: attr(data-n);
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--teal-accent);
-    }
-
-    p {
-      margin: 0 0 1rem;
-      max-width: 62ch;
-    }
-
-    ul.why {
-      list-style: none;
-      margin: 1.25rem 0 0;
-      padding: 0;
-    }
-
-    ul.why li {
-      padding: 0.7rem 0 0.7rem 1.1rem;
-      border-left: 2px solid var(--teal);
-      margin-bottom: 0.6rem;
-      max-width: 62ch;
-      color: var(--muted);
-    }
-
-    ul.why li strong {
-      color: var(--ink);
-    }
-
-    code {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.88em;
-      background: var(--code-bg);
-      color: var(--ink);
-      padding: 0.08em 0.34em;
-      border: 1px solid var(--line-soft);
-    }
-
-    /* Hero sits on a dark surface in both themes, so code inside it needs its own
-       light-on-dark treatment rather than the body's dark-on-light. */
-    .hero code {
-      background: rgba(255, 255, 255, 0.1);
-      color: #eaf6f8;
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    /* Context-type grid — sharp cells, hairline dividers. */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      border: 1px solid var(--line);
-      margin: 1.4rem 0;
-    }
-
-    .grid .item {
-      padding: 1.1rem 1.15rem;
-      border-right: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .grid .item strong {
-      display: block;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-
-    .grid .item span {
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
-    /* Prompt blocks — copyable, sharp, monospace body. */
-    .prompt {
-      border: 1px solid var(--line);
-      margin: 1.25rem 0;
-    }
-
-    .prompt-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .prompt-label {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .copy {
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      background: transparent;
-      border: 1px solid var(--line-soft);
-      padding: 0.3rem 0.7rem;
-      cursor: pointer;
-      transition: border-color 0.12s ease, color 0.12s ease;
-    }
-
-    .copy:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-    }
-
-    .copy.copied {
-      border-color: var(--teal);
-      color: var(--teal);
-    }
-
-    .prompt-body {
-      position: relative;
-    }
-
-    .prompt pre {
-      margin: 0;
-      padding: 0.9rem 0.95rem;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: var(--ink);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      max-height: 5.5rem;
-      overflow: hidden;
-    }
-
-    .prompt.open pre {
-      max-height: none;
-    }
-
-    /* Fade at the bottom of a collapsed prompt, hinting there's more. */
-    .prompt:not(.open) .prompt-body::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2.5rem;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none;
-    }
-
-    .prompt-expand {
-      display: block;
-      width: 100%;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: transparent;
-      border: 0;
-      border-top: 1px solid var(--line-soft);
-      padding: 0.55rem;
-      cursor: pointer;
-      transition: color 0.12s ease;
-    }
-
-    .prompt-expand:hover {
-      color: var(--teal);
-    }
-
-    /* Chain — square index markers, monospace. */
-    ol.chain {
-      margin: 1.4rem 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: step;
-      border-top: 1px solid var(--line-soft);
-    }
-
-    ol.chain li {
-      counter-increment: step;
-      position: relative;
-      padding: 0.7rem 0 0.7rem 3rem;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    ol.chain li::before {
-      content: counter(step, decimal-leading-zero);
-      position: absolute;
-      left: 0;
-      top: 0.75rem;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--bg);
-      background: var(--ink);
-      width: 1.9rem;
-      height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    ol.chain li strong {
-      color: var(--ink);
-    }
-
-    footer {
-      padding: 2.25rem 0 3.5rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 3px solid var(--ink);
-      margin-top: 1rem;
-    }
-
-    footer .mono {
-      letter-spacing: 0.02em;
-    }
-
-    footer a {
-      color: var(--ink);
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-row .mono {
-      margin: 0;
-    }
-
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: "JetBrains Mono", ui-monospace, monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      background: transparent;
-      border: 1px solid var(--line-soft);
-      padding: 0.4rem 0.75rem;
-      cursor: pointer;
-      transition: border-color 0.12s ease, color 0.12s ease;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-    }
-
-    .theme-toggle svg {
-      display: block;
-    }
-
-    /* Mobile — tighten spacing, let the grid collapse to one column. */
-    @media (max-width: 600px) {
-      .hero-inner {
-        padding: 2.5rem 1.25rem 2.25rem;
-      }
-
-      .wrap {
-        padding: 0 1.25rem;
-      }
-
-      main section {
-        padding: 2.25rem 0;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-row {
-        justify-content: flex-start;
-      }
-    }
-
-    /* Keyboard focus — a sharp visible ring, matching the design. Keyboard-only
-       users need this the way the CTA needs a hover state. */
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
-    }
-
-    /* Respect reduced-motion preferences. */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
@@ -576,24 +106,71 @@
 
       <div class="prompt">
         <div class="prompt-head">
-          <span class="prompt-label">New project</span>
-          <button class="copy" type="button" data-copy="p-new">Copy prompt</button>
+          <span class="prompt-label" id="l-new">New project</span>
+          <button class="copy" type="button" data-copy="p-new" aria-describedby="l-new">Copy prompt</button>
         </div>
         <div class="prompt-body">
           <pre id="p-new">I want to start a new project (roughly: what it is). Use github.com/Asskildt/vibe-coding-template as the framework. Copy its files in, then read AGENTS.md and docs/planning/README.md. Before any code, ask me what you need to understand the project: the goal, who it's for, the constraints. Decide with me whether it needs the planning chain (it has a skip-it threshold). Walk me through the planning one step at a time instead of guessing, then fill in the AGENTS.md placeholders. Don't start building until we've agreed on the plan.</pre>
         </div>
-        <button class="prompt-expand" type="button" aria-expanded="false">Expand</button>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-new" aria-describedby="l-new">Expand</button>
       </div>
 
       <div class="prompt">
         <div class="prompt-head">
-          <span class="prompt-label">Existing project</span>
-          <button class="copy" type="button" data-copy="p-existing">Copy prompt</button>
+          <span class="prompt-label" id="l-existing">Existing project</span>
+          <button class="copy" type="button" data-copy="p-existing" aria-describedby="l-existing">Copy prompt</button>
         </div>
         <div class="prompt-body">
-          <pre id="p-existing">I have an existing project and want to adopt the conventions from github.com/Asskildt/vibe-coding-template where they fit. First read the conventions there, at least AGENTS.md, docs/design.md, docs/ai-workflow.md, and docs/planning/README.md. Then read my project properly: not just the top-level files, but the real structure, the main modules, config, and any existing docs, so your read is grounded in how it actually works. Then talk it through with me: propose which conventions are worth adopting and which don't fit, and whether to copy files in or just borrow ideas. Don't change anything until we've agreed.</pre>
+          <pre id="p-existing">I have an existing project and want to adopt the conventions from github.com/Asskildt/vibe-coding-template where they fit. First read the conventions there, at least AGENTS.md, docs/backend.md, docs/design.md, docs/ai-workflow.md, and docs/planning/README.md. Then read my project properly: not just the top-level files, but the real structure, the main modules, config, and any existing docs, so your read is grounded in how it actually works. Then talk it through with me: propose which conventions are worth adopting and which don't fit, and whether to copy files in or just borrow ideas. Don't change anything until we've agreed.</pre>
         </div>
-        <button class="prompt-expand" type="button" aria-expanded="false">Expand</button>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-existing" aria-describedby="l-existing">Expand</button>
+      </div>
+
+      <h3>Take just one part</h3>
+      <p>Each prompt below pulls in one part of the template and leaves the rest.</p>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-writing">Writing rules</span>
+          <button class="copy" type="button" data-copy="p-writing" aria-describedby="l-writing">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-writing">I want the writing rules from github.com/Asskildt/vibe-coding-template. Read the sections "Writing — Precision Over Volume" and "User-Facing Text — Avoid AI Signals" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Then put the rules where your instructions live. In a coding agent, add them to my project's AGENTS.md or CLAUDE.md. In a chat assistant, condense them into custom instructions that fit the character limit: keep the rules, drop the explanations. The examples in the AI-signal list are Norwegian, so adapt them to my language. Show me the result before you save or add anything.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-writing" aria-describedby="l-writing">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-code">Code discipline</span>
+          <button class="copy" type="button" data-copy="p-code" aria-describedby="l-code">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-code">I want the code discipline rules from github.com/Asskildt/vibe-coding-template. Read the section "Code — Proportional Diffs" and Working Rules 2 ("Stop instead of hammering"), 4 ("Simplicity first") and 10 ("Replace means delete") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Compare them with the instruction file I already use, then propose adding only what is missing or conflicts with mine. Don't duplicate rules I already have. Don't change anything until we've agreed.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-code" aria-describedby="l-code">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-facts">Fact-checking</span>
+          <button class="copy" type="button" data-copy="p-facts" aria-describedby="l-facts">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-facts">I want the source-checking routine from github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/.agent/skills/verify-sources/SKILL.md. Add it to my project in the form my tool supports: a skill file if it has skills, otherwise a short section in my instruction file. Adapt the trigger to the kinds of claims my project publishes. Ask me before you add anything.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-facts" aria-describedby="l-facts">Expand</button>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-label" id="l-api">Agent-friendly APIs and UI</span>
+          <button class="copy" type="button" data-copy="p-api" aria-describedby="l-api">Copy prompt</button>
+        </div>
+        <div class="prompt-body">
+          <pre id="p-api">I want my API and interface to be easy for AI agents to use, following github.com/Asskildt/vibe-coding-template. Read the section "AI-First: Make the System Navigable for Agents" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md and the section "Accessibility & machine-readability (baseline)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md. Then read how my API returns errors, paginates lists and formats dates, enums and IDs, and how my frontend exposes controls, accessible names, state and URLs. Show me where they differ from those rules, starting with error responses that don't tell the caller what to do next. Propose changes in order of impact. Don't change anything until we've agreed.</pre>
+        </div>
+        <button class="prompt-expand" type="button" aria-expanded="false" aria-controls="p-api" aria-describedby="l-api">Expand</button>
       </div>
     </section>
 
@@ -678,81 +255,7 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var storageKey = 'theme';
-      var cycle = ['system', 'light', 'dark'];
-      var labels = { system: 'System', light: 'Light', dark: 'Dark' };
-      var toggle = document.querySelector('.theme-toggle');
-      var label = toggle.querySelector('.theme-label');
-
-      function systemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-
-      function apply(choice) {
-        var effective = choice === 'system' ? systemTheme() : choice;
-        document.documentElement.setAttribute('data-theme', effective);
-        localStorage.setItem(storageKey, choice);
-        label.textContent = labels[choice];
-      }
-
-      apply(localStorage.getItem(storageKey) || 'system');
-
-      toggle.addEventListener('click', function () {
-        var current = localStorage.getItem(storageKey) || 'system';
-        apply(cycle[(cycle.indexOf(current) + 1) % cycle.length]);
-      });
-
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
-        if ((localStorage.getItem(storageKey) || 'system') === 'system') apply('system');
-      });
-    })();
-  </script>
-
-  <script>
-    (function () {
-      document.querySelectorAll('.prompt-expand').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var prompt = btn.closest('.prompt');
-          var open = prompt.classList.toggle('open');
-          btn.textContent = open ? 'Collapse' : 'Expand';
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-      });
-
-      document.querySelectorAll('.copy').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var pre = document.getElementById(btn.getAttribute('data-copy'));
-          if (!pre) return;
-          var text = pre.textContent;
-          function done() {
-            var original = btn.textContent;
-            btn.textContent = 'Copied';
-            btn.classList.add('copied');
-            setTimeout(function () {
-              btn.textContent = original;
-              btn.classList.remove('copied');
-            }, 1600);
-          }
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done).catch(fallback);
-          } else {
-            fallback();
-          }
-          function fallback() {
-            var r = document.createRange();
-            r.selectNodeContents(pre);
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(r);
-            try { document.execCommand('copy'); done(); } catch (e) { /* no-op */ }
-            sel.removeAllRanges();
-          }
-        });
-      });
-    })();
-  </script>
+  <script src="/script.js"></script>
 </body>
 
 </html>

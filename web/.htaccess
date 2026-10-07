@@ -2,3 +2,10 @@
 # This folder is the document root for the subdomain; /404.html is relative to it.
 
 ErrorDocument 404 /404.html
+
+# Serve the markdown version and llms.txt as UTF-8 text so agents and browsers don't download or garble them.
+AddType text/markdown .md
+AddCharset UTF-8 .md
+<Files "llms.txt">
+  ForceType "text/plain; charset=utf-8"
+</Files>

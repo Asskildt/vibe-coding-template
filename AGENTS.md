@@ -138,7 +138,8 @@ Components rendered in lists receive data as props, they don't fetch it themselv
 
 Moved out of this file (rule 13). Read the file when the task matches:
 
-- Before writing code that hits a database or renders lists, or that defines API responses and errors: `docs/backend.md` (performance rules, state and immutability, agent-navigable errors and patterns).
+- Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (performance rules, state and immutability, agent-navigable errors).
+- Before building or changing UI or public pages: `docs/design.md` (design system, accessibility and agent-readable UI, machine-readable content).
 - Before changing the database schema: `.agent/skills/migrate-database/SKILL.md` (steps and migration-pipeline traps). Only if the project has a database. The skill ships as an example: fill it in, or delete it together with this line.
 - Before putting a number, date, quote or named institution in a doc or on the site: `.agent/skills/verify-sources/SKILL.md`. Only for content-heavy or public projects.
 
@@ -214,6 +215,7 @@ A task is done when all of this holds — not before:
 - **Auth:** explicit. A dev bypass requires a named flag that cannot be combined with production.
 - **Tenant/user isolation:** every `update`/`delete`/`findFirst` against a table with an owner ID has it in the `where` — even when the ID comes from an earlier scoped read. That makes the rule greppable. Prefer RLS at the database level where the platform supports it.
 - **Secrets:** environment variables only, never in code. Don't echo secret values in responses.
+- **Local agent credentials:** token or credential files for agents (e.g. a dev token under `.agent/`) are gitignored before first use.
 - **CORS:** allow-list, never wildcard in production.
 - **Input:** sanitize and validate everything from outside. Parameterized queries, never string interpolation in SQL.
 
@@ -246,6 +248,8 @@ List the real ones so the boundary is greppable, not guessed.
 > just the rule.
 
 - {Example: «Rå SQL må ligge i `drizzle/`, ellers kjører migrasjonen aldri — uten feilmelding.»}
+- Promptene i `web/index.html` viser til AGENTS.md-seksjoner og filstier ved navn. Gir du en seksjon nytt navn eller flytter en fil, slutter promptene å virke uten feilmelding. Oppdater dem i samme endring.
+  `web/index.md` er generert: kjør `scripts/build-index-md.py`, aldri rediger for hånd (pre-commit-hooken sjekker). `web/llms.txt` vedlikeholdes fortsatt for hånd og oppdateres i samme endring.
 
 ---
 
@@ -279,11 +283,11 @@ of contents.}
 
 - `docs/architecture.md` — layering and module structure, kept current
 - `docs/domain.md` — domain terms, abbreviations, business rules (Norwegian domain lives here)
-- `docs/backend.md` — performance rules, state and immutability, agent-navigable errors and patterns
+- `docs/backend.md` — performance rules, state and immutability, agent-navigable errors
 - `docs/data-model.md` — entities, relations, invariants
 - `docs/api-reference.md` — OpenAPI spec or generated docs
-- `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator
-- `docs/design.md` — this project's design system + a checklist for avoiding AI tells in UI
+- `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
+- `docs/design.md` — this project's design system, accessibility and agent-readable UI, machine-readable content, AI-tells checklist
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
 

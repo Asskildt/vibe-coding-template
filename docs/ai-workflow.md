@@ -1,7 +1,8 @@
 # AI workflow
 
-> How to work *with* the agent: which class of model for which job, how to spend tokens, and when to
-> drive step-by-step versus hand off a whole task. Loaded on demand, not part of `AGENTS.md`.
+> How to work *with* the agent: which class of model for which job, how to spend tokens, when to
+> drive step-by-step versus hand off a whole task, and how to delegate to subagents. Loaded on
+> demand, not part of `AGENTS.md`.
 >
 > - **Owner:** {name / role}
 > - **Last updated:** {YYYY-MM-DD}
@@ -75,6 +76,32 @@ orchestrate. If the criteria only become clear as you go, conduct.**
 **State the scope in the request, either way.** Agents read vague verbs at their widest: "improve
 this" can become a rewrite. Say which level you mean: fix errors, tighten, or rewrite; fix the bug,
 or clean up the module.
+
+## Delegating to subagents and workflows
+
+Most agent tools can now hand a task to a subagent that works in its own context and returns only
+the result (subagents in Claude Code, Codex, Gemini CLI and Cursor, workflows in Kiro). The formats
+differ and change often. These patterns don't.
+
+- **Delegate breadth, do precision yourself.** Broad reading, investigation and independent
+  subtasks go to a subagent, which keeps the main session's context clean. A one-line fix costs
+  more to brief than to do.
+- **The brief stands alone.** A subagent knows nothing of the conversation. Give it the goal,
+  exact file paths, decisions already made, what not to touch, and how to verify its own work. Too
+  long beats too short.
+- **Read before build.** A read-only mapping step on a cheap model before an expensive coding step.
+  The coder starts from findings instead of searching.
+- **Implement and review in a loop, reviewer last.** The reviewer's verdict ends the loop, so a
+  rejection always goes back to the coder. Cap the number of rounds.
+- **Set the model per step.** A step without an explicit model often inherits the session's, which
+  is usually the most expensive. Route each step by the classes above.
+- **A subagent's finding is a claim, not a fact.** Check it against the source before it feeds the
+  next step or lands in a doc. Typical failure: a confident, plausible statement about how a tool
+  behaves, which turns out to be the opposite of its current documentation. Without a review step,
+  that error gets copied into every file the next step writes. Research needs a check too, not
+  just code.
+- **Parallel only when independent.** Branches that touch the same files conflict. Split by file
+  or module, or run them in sequence.
 
 ## Verification threshold
 

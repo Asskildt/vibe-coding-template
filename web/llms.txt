@@ -1,0 +1,18 @@
+# vibe-coding-template
+
+> An AGENTS.md template and a short planning chain for giving coding agents real context before the first line of code. Plain Markdown, nothing to install, works with any coding agent.
+
+The HTML page at https://vibe.asskildt.eu/ is canonical. The markdown version has the same content. The links below point to the raw template files.
+
+## Page
+
+- [Landing page (markdown)](https://vibe.asskildt.eu/index.md): The page text and all six copyable prompts
+
+## Template files
+
+- [AGENTS.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md): Working rules, code style, security and the index of the other files
+- [docs/backend.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md): Performance, state, agent-navigable APIs and errors
+- [docs/design.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md): Design system, accessibility and agent-readable UI, machine-readable content
+- [docs/ai-workflow.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/ai-workflow.md): Model routing, token economy, conductor versus orchestrator, and delegating to subagents
+- [docs/planning/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/planning/README.md): When the planning chain applies, and when to skip it
+- [.agent/skills/verify-sources/SKILL.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/.agent/skills/verify-sources/SKILL.md): Source checks for factual claims

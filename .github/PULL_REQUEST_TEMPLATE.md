@@ -22,6 +22,7 @@ The one checkpoint that keeps context from rotting. Docs are code — reviewed h
 - [ ] Does this change touch an API endpoint, a page, a domain flow, or a schema? If yes, the matching `docs/` file is updated **in this PR**.
 - [ ] Did a decision get made here that a future "why did we do X?" would ask about? If yes, there's an ADR in `docs/decisions/`.
 - [ ] Did the agent hit the **same mistake twice** while building this? If yes, the relevant `docs/` file (or `AGENTS.md`) is updated so it doesn't recur — the repeated mistake is the signal, not a calendar date.
+- [ ] Does the project keep hand-maintained copies of content (e.g. a markdown version of a page, `llms.txt`, prompts that quote file paths or section names)? If yes, they are updated **in this PR**.
 
 ## Notes for the reviewer
 
