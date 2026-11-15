@@ -93,7 +93,13 @@ frontend/app/
 ```
 
 **Principle:** Each folder and file has one area of responsibility. New code goes in the right
-module, not wherever is easiest.
+module, not wherever is easiest. Easy to navigate for a person and an agent from names alone.
+Details and checks: `docs/structure.md`.
+
+- **Dependency direction.** `core/` never imports from `modules/`. A module imports another module only through its public export (one index file), never its internal files. No import cycles.
+- **Folder width.** At 8 to 10 files at the same level, consider grouping into subfolders by responsibility, not by type (no `utils/` or `helpers/`).
+- **Short files, few comments:** rules 5 and 6.
+- **Enforcement scales with project size** (levels A to C in `docs/structure.md`): review, then lint rules, then CI boundary checks. Recommendations, not requirements.
 
 ---
 
@@ -112,34 +118,16 @@ Rules 4, 6 and 10 set the baseline. Also:
 
 ---
 
-## Code Style
-
-### TypeScript
-- Strict mode. Avoid `any`.
-- Use a validation library (e.g. Zod) for 100% of runtime validation, and derive types from the schemas (`z.infer`) rather than writing them twice.
-- APIs strictly typed.
-
-### Naming
-- **Components / pages:** PascalCase (`ProductCard`, `OrderList`)
-- **Routes and services:** camelCase (`orders.routes.ts`, `listOrders`)
-- **Hooks / composables:** camelCase with `use` prefix (`useAuth`)
-- **Schemas:** PascalCase with `Schema` suffix (`OrderStatusSchema`)
-- **DB tables:** snake_case in the database, camelCase in the ORM
-- **API enums:** SCREAMING_SNAKE_CASE (`DRAFT`, `PUBLISHED`)
-- **Constants:** UPPER_SNAKE_CASE
-
-### Thin Routes / Thin Components
-Routes parse input, call the service, return the result — no db calls directly in route files.
-Components rendered in lists receive data as props, they don't fetch it themselves (see `docs/backend.md`).
-
----
-
 ## Read on Demand
 
 Moved out of this file (rule 13). Read the file when the task matches:
 
+- Before writing or reviewing code: `docs/code-style.md` (TypeScript, naming, thin routes and components, UI token rules).
+- Before writing tests, running checks, or reporting a task as done: `docs/testing.md` (test rules, Definition of Done, what not to spend time on).
 - Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (performance rules, state and immutability, agent-navigable errors).
-- Before building or changing UI or public pages: `docs/design.md` (design system, accessibility and agent-readable UI, machine-readable content, SEO and sharing).
+- Before creating files, folders or cross-module imports: `docs/structure.md` (dependency direction, folder width, checks by project size).
+- Before building or changing UI: `docs/design/README.md` (tiers and your system), then the file for the task: `tokens.md` (tokens, themes, brands), `components.md`, `layouts.md` (page shells), `accessibility.md`, `ai-tells.md`. Public pages also `seo.md`.
+- Before adopting a new standard, format or tool, and at the quarterly review: `docs/standards/README.md` (weigh by cost to switch away) and `docs/standards/watchlist.md`.
 - Before changing the database schema: `.agent/skills/migrate-database/SKILL.md` (steps and migration-pipeline traps). Only if the project has a database. The skill ships as an example: fill it in, or delete it together with this line.
 - Before putting a number, date, quote or named institution in a doc or on the site: `.agent/skills/verify-sources/SKILL.md`. Only for content-heavy or public projects.
 
@@ -185,31 +173,6 @@ like this file and `docs/*`. "Writing — Precision Over Volume" applies everywh
 
 ---
 
-## Testing
-
-Don't create new test suites unprompted. Existing tests are the contract: always run them. Add a
-test when you fix a bug a test would have caught. Test behavior, not implementation details.
-
-- **Run once, not watch:** `{npm run test:run}`. Watch mode blocks.
-- **Deep where it matters** (core logic, invariants, legal requirements), light for API endpoints.
-- **No checkmark without proof.** A roadmap item is marked done only when a test or runnable command proves it. Written-but-unverified code is not done.
-
-### Definition of Done
-A task is done when all of this holds — not before:
-
-- [ ] Code compiles / builds without errors (`{npm run build}`)
-- [ ] Existing tests are green (`{npm run test:run}`)
-- [ ] No new linting errors (`{npm run lint}`)
-- [ ] Documentation touched by the change is updated in the same session
-- [ ] No dead code or replaced files left behind
-
-### What Not to Spend Time On
-- **Don't run type-check/build after every file.** Run it *once* when all changes are done.
-- **Don't start the dev server.** It blocks, and the user runs it themselves.
-- **Don't verify that something "looks right".** Verify that it compiles and the tests are green. Leave visual judgment to the user — it's faster for a human. (Reading output to debug *logic* is still fine.)
-
----
-
 ## Security
 
 - **Auth:** explicit. A dev bypass requires a named flag that cannot be combined with production.
@@ -229,7 +192,7 @@ List the real ones so the boundary is greppable, not guessed.
 
 **Needs sign-off before editing:**
 
-- {`docs/design.md` — the approved design spec}
+- {`docs/design/` — the approved design spec and tokens}
 - {`assets/logo.svg` — approved logo (a color swap via CSS vars is fine; the mark's form is not)}
 - {legal / contractual / compliance copy}
 
@@ -267,27 +230,25 @@ List the real ones so the boundary is greppable, not guessed.
 
 The index of the template's own files, loaded on demand (rule 13). {Keep this list current as docs
 change. Once `docs/` passes six to eight files or gains subfolders, add a `docs/README.md` table
-of contents.}
+of contents. `docs/design/` and `docs/standards/` already have their own.}
 
 **Before building (planning phase — see the threshold in `docs/planning/README.md`):**
 
-- `docs/planning/README.md` — when the planning chain applies, and the skip-it exit
-- `docs/planning/00-brief.md` — what we're building, for whom, why now
-- `docs/planning/01-stack-decision.md` — decision framework for language/framework choice
-- `docs/planning/02-architecture.md` — frozen rough sketch (distinct from the living `docs/architecture.md`)
-- `docs/planning/03-extension-points.md` — deliberately anticipated growth directions
-- `docs/planning/04-milestones.md` — build order and what's deferred
-- `docs/planning/05-deploy-strategy.md` — deploy platform, environments, branch mapping (decision framework)
+- `docs/planning/README.md` — when the planning chain applies, and the skip-it exit. Then in order: `00-brief.md` (what, for whom, why now), `01-stack-decision.md` (framework for choosing a stack), `02-architecture.md` (frozen rough sketch, distinct from the living `docs/architecture.md`), `03-extension-points.md`, `04-milestones.md`, `05-deploy-strategy.md`
 
 **While building (living truth):**
 
 - `docs/architecture.md` — layering and module structure, kept current
 - `docs/domain.md` — domain terms, abbreviations, business rules (Norwegian domain lives here)
+- `docs/code-style.md` — TypeScript, naming, thin routes and components, UI token rules
+- `docs/testing.md` — test rules, Definition of Done, what not to spend time on
 - `docs/backend.md` — performance rules, state and immutability, agent-navigable errors
 - `docs/data-model.md` — entities, relations, invariants
 - `docs/api-reference.md` — OpenAPI spec or generated docs
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
-- `docs/design.md` — this project's design system, accessibility and agent-readable UI, machine-readable content, SEO and sharing, AI-tells checklist
+- `docs/structure.md` — dependency direction, folder width, structure checks by project size
+- `docs/design/README.md` — design system tiers and this project's system. Next to it: `tokens.md`, `components.md`, `layouts.md`, `accessibility.md`, `seo.md`, `ai-tells.md`
+- `docs/standards/README.md` — adopting standards (weighted by switching cost), quarterly review. `watchlist.md` holds the status
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
 

@@ -6,13 +6,17 @@ The HTML page at https://vibe.asskildt.eu/ is canonical. The markdown version ha
 
 ## Page
 
-- [Landing page (markdown)](https://vibe.asskildt.eu/index.md): The page text and all eight copyable prompts
+- [Landing page (markdown)](https://vibe.asskildt.eu/index.md): The page text and all ten copyable prompts
 
 ## Template files
 
-- [AGENTS.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md): Working rules, code style, security and the index of the other files
+- [AGENTS.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md): Working rules, code structure, security and the index of the other files
+- [docs/code-style.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/code-style.md): TypeScript, naming, thin routes and components, UI token rules
+- [docs/testing.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/testing.md): Test rules, Definition of Done, what not to spend time on
 - [docs/backend.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md): Performance, state, agent-navigable APIs and errors
-- [docs/design.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design.md): Design system, accessibility and agent-readable UI, machine-readable content
+- [docs/structure.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md): Dependency direction, folder width and structure checks by project size
+- [docs/design/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design/README.md): Design system tiers, tokens and white label, components, layout shells, accessibility, SEO
+- [docs/standards/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md): How new standards are adopted, weighted by switching cost, and the quarterly review
 - [docs/ai-workflow.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/ai-workflow.md): Model routing, token economy, conductor versus orchestrator, and delegating to subagents
 - [docs/planning/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/planning/README.md): When the planning chain applies, and when to skip it
 - [.agent/skills/verify-sources/SKILL.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/.agent/skills/verify-sources/SKILL.md): Source checks for factual claims

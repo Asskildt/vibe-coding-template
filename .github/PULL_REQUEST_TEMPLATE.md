@@ -8,7 +8,7 @@
 
 ## Definition of Done
 
-(from `AGENTS.md` — all must hold before merge)
+(from `docs/testing.md` — all must hold before merge)
 
 - [ ] Builds without errors
 - [ ] Existing tests are green

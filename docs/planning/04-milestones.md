@@ -31,7 +31,7 @@ here stops them from creeping in early.}
 
 ## Definition of done per phase
 
-A phase is done on the same terms as any task (see the Definition of Done in `AGENTS.md`): it
+A phase is done on the same terms as any task (see the Definition of Done in `docs/testing.md`): it
 compiles, existing tests are green, no new lint errors, docs touched are updated, no dead code left
 behind. A phase is not "done" because the code exists — it's done when a test or runnable command
 proves it.

@@ -78,4 +78,4 @@ Markdown everywhere. Complete OpenAPI spec available in one call. Examples in ev
 Actions performed by an agent are traceable (`createdByAgentId`, a separate marker in the audit log).
 An agent never performs an irreversible action without an explicitly configured autonomy level — the default is "suggest".
 
-The UI side of agent-navigability (accessible controls, state in the URL, `llms.txt`, markdown versions) lives in `design.md`, under "Accessibility & machine-readability (baseline)".
+The UI side of agent-navigability (accessible controls, state in the URL, `llms.txt`, markdown versions) lives in `docs/design/accessibility.md`.

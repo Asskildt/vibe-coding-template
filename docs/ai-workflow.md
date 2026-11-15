@@ -105,7 +105,7 @@ differ and change often. These patterns don't.
 
 ## Verification threshold
 
-Ties directly to the Definition of Done in `AGENTS.md`. One addition specific to model routing:
+Ties directly to the Definition of Done in `docs/testing.md`. One addition specific to model routing:
 
 **The cheaper the model used to generate something, the stricter the verification before it ships.**
 Fast-class output following a pattern still has to compile, pass existing tests, and clear lint —
@@ -118,4 +118,4 @@ comes from a test or a runnable command, never from "it looks right".
 
 - [`decisions/0001-context-engineering-source.md`](decisions/0001-context-engineering-source.md) —
   the six context types and the static/dynamic split this workflow assumes.
-- `AGENTS.md` — the Definition of Done and rule 13 (short static file) that this file builds on.
+- `docs/testing.md` — the Definition of Done. `AGENTS.md` — rule 13 (short static file) that this file builds on.

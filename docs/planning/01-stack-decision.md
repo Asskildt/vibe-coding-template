@@ -37,9 +37,9 @@ from a favourite framework.
    - Is there a documented design system already, or is the agent the only thing standing between
      "nothing specified" and generic AI defaults?
    - Will it support light/dark/system themes? The recommended default is yes — see the theme
-     section in `docs/design.md`. If you skip it, that's a decision to record here.
+     section in `docs/design/tokens.md`. If you skip it, that's a decision to record here.
 
-   **Default:** start with the "Avoid AI Tells" checklist in `docs/design.md` — it's free and needs
+   **Default:** start with the "Avoid AI Tells" checklist in `docs/design/ai-tells.md` — it's free and needs
    no dependency. Consider adopting a dedicated design tool (e.g.
    [Impeccable](https://impeccable.style), a cross-tool skill that runs a deterministic version of
    that checklist against a `DESIGN.md`/tokens file) only if UI work is ongoing *and* the checklist
