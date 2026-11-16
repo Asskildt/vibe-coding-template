@@ -16,6 +16,7 @@ them, and for each, note the one boundary or data-model choice that must hold if
 | Direction | Likelihood | What must hold today (cheap now, expensive later) |
 |-----------|-----------|---------------------------------------------------|
 | {Multi-tenant} | {likely} | {`tenantId` on the data model from day one — the column is free now, adding it later is a migration. Isolation logic stays unbuilt until needed.} |
+| {White label / several brands} | {possible} | {Components use semantic tokens only and never hardcode values, so a brand later is a CSS override of semantic tokens. See "Optional: white label" in `docs/design/tokens.md`.} |
 | {i18n / new language} | {possible} | {Keep user-facing strings out of logic; don't hardcode copy into components.} |
 | {New integrations} | {possible} | {Talk to external services through one adapter seam, not scattered calls.} |
 | {More user types / roles} | {?} | {A role field and one authorization checkpoint, not permission checks sprinkled everywhere.} |

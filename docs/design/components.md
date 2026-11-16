@@ -62,8 +62,8 @@ hardcode.
 - Renders correct semantic HTML and has an accessible name for icon-only controls
   ([`accessibility.md`](accessibility.md)).
 - Visible `:focus-visible` state, keyboard reachable.
-- Works in every mode and brand with no component-level condition on theme or brand. If the code
-  checks `brand === 'acme'`, the design belongs in a token.
+- Works in every mode with no component-level condition on theme. If the code checks
+  `theme === 'dark'` to pick a color, the value belongs in a semantic token.
 - Components in lists receive data as props and don't fetch it themselves.
 
 ## Documenting components

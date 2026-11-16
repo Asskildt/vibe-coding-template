@@ -11,7 +11,7 @@
 
 ## Adopted (default in the template)
 
-| Standard | Status 2026-11-15 | Cost | Source | Used in |
+| Standard | Status | Cost | Source | Used in |
 |---|---|---|---|---|
 | WCAG 2.2 AA as target | W3C Recommendation. 2.2 conformance also meets 2.0 and 2.1 | Low | [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/) (P) | `design/accessibility.md` |
 | Norwegian ICT accessibility regulation | Private web solutions must meet WCAG 2.0 A and AA (minus 1.2.3 to 1.2.5). Public bodies follow EN 301 549 and need an accessibility statement | Not optional | [Lovdata FOR-2013-06-21-732](https://lovdata.no/dokument/SF/forskrift/2013-06-21-732) (P), [uutilsynet.no](https://www.uutilsynet.no/regelverk/) (P) | `design/accessibility.md` |
@@ -22,15 +22,16 @@
 
 ## Optional (adopt by project tier or need)
 
-| Standard | Status 2026-11-15 | Cost | Source | Condition |
+| Standard | Status | Cost | Source | Condition |
 |---|---|---|---|---|
-| DTCG design tokens 2025.10 | First stable version. A Community Group Report, not a W3C Standard. The group's own page lists Figma, Penpot, Sketch, Tokens Studio, Style Dictionary and Terrazzo as supporters. Style Dictionary does not fully support 2025.10 yet. Figma's own docs were not checked | Medium | [W3C announcement](https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/) (P), [Style Dictionary DTCG page](https://styledictionary.com/info/dtcg/) (P) | Design tier 3 (several brands) |
+| DTCG design tokens 2025.10 | First stable version. A Community Group Report, not a W3C Standard. The group's own page lists Figma, Penpot, Sketch, Tokens Studio, Style Dictionary and Terrazzo as supporters. Style Dictionary does not fully support 2025.10 yet. Figma's own docs were not checked | Medium | [W3C announcement](https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/) (P), [Style Dictionary DTCG page](https://styledictionary.com/info/dtcg/) (P) | Design tier 3 (Figma sync or a design team) |
+| DESIGN.md (google-labs-code/design.md) | Format at version `alpha`, spec and CLI under active development. CLI `@google/design.md` 0.4.0 (lint, diff, export to Tailwind and DTCG). Apache-2.0 | Low | [GitHub README and spec](https://github.com/google-labs-code/design.md) (P), [npm](https://www.npmjs.com/package/@google/design.md) (P) | Project uses Google Stitch, or wants one readable design file for agents. Not in the template |
 | Figma MCP server and Code Connect | Reading design context is usable. Writing to the canvas is beta. Seat and plan limits apply | Low | [Figma developer docs](https://developers.figma.com/docs/figma-mcp-server/) (P) | Project designs in Figma |
 | `llms.txt` | A proposal, not a standards-body spec. Published by many developer-documentation sites, not all. No proven effect on search. Google Search does not use it, per secondary sources | Low | [llmstxt.org](https://llmstxt.org) (P for the proposal), own HTTP check 2026-11-15 | Public documentation or content sites only |
 
 ## Watching (not adopted yet)
 
-| Item | Status 2026-11-15 | Cost if built in early | Source | Revisit when |
+| Item | Status | Cost if built in early | Source | Revisit when |
 |---|---|---|---|---|
 | WCAG 3.0 | Working Draft. Final requirements will differ | Low (criteria, not architecture) | [W3C history](https://www.w3.org/standards/history/wcag-3.0/) (P) | It reaches Candidate Recommendation |
 | CSS `@function` | Not Baseline (Chrome/Edge only) | High in a token system | [web-features](https://registry.npmjs.org/web-features) (P) | Baseline Newly in all three engines |
@@ -49,6 +50,9 @@
   to directive 2016/2102.
 - Figma's own documentation for DTCG import and export. Only a forum report was found, claiming
   that composite tokens (typography, gradient, shadow) are not exported.
+- Whether any coding agent (Claude Code, Cursor, Codex, Copilot, Gemini CLI) reads `DESIGN.md`
+  automatically. No primary source found. Also unverified: where the file should live (root or
+  `docs/`), and that Google Stitch's own documentation matches the GitHub repo.
 - ISO/IEC 40500:2025 (WCAG 2.2 as an ISO standard).
 - A ready-made lint rule for "maximum files per folder", and a Stylelint plugin that checks
   Baseline support.

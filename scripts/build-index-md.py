@@ -3,8 +3,10 @@
 
 Usage:
   python3 scripts/build-index-md.py          write web/index.md
-  python3 scripts/build-index-md.py --check  exit 1 if web/index.md is out of date
+  python3 scripts/build-index-md.py --check  exit 1 if web/index.md is out of date, or if a prompt
+                                             names a file or quoted heading that doesn't exist
 """
+import html
 import re
 import sys
 from html.parser import HTMLParser
@@ -156,6 +158,38 @@ class Converter(HTMLParser):
             self.put(data)
 
 
+# Files the prompts name that live in the user's own project, not in this repo.
+USER_FILES = {"CLAUDE.md", "GEMINI.md"}
+RAW_URL = re.compile(r"https://raw\.githubusercontent\.com/Asskildt/vibe-coding-template/main/(\S+?\.md)")
+MD_NAME = re.compile(r"[\w.\-/]+\.md\b")
+
+
+def check_prompts():
+    """Return problems: missing files and quoted headings not found in the prompt's files."""
+    problems = []
+    for pid, raw in re.findall(r'<pre id="([^"]+)">(.*?)</pre>', SRC.read_text(encoding="utf-8"), re.S):
+        text = html.unescape(raw)
+        paths = RAW_URL.findall(text)
+        text = RAW_URL.sub(" ", text)
+        names = [n for n in MD_NAME.findall(text) if n not in USER_FILES]
+        paths += [n for n in names if "/" in n]
+        dirs = [ROOT] + [(ROOT / p).parent for p in paths]
+        for n in names:
+            if "/" not in n:  # bare name: beside one of the other files, or at the root
+                found = next((d / n for d in dirs if (d / n).is_file()), None)
+                if found:
+                    paths.append(str(found.relative_to(ROOT)))
+                    continue
+                paths.append(n)
+        problems += [f"{pid}: file not found: {n}" for n in sorted(set(paths)) if not (ROOT / n).is_file()]
+        paths = sorted({n for n in paths if (ROOT / n).is_file()})
+        bodies = [(ROOT / p).read_text(encoding="utf-8") for p in paths]
+        for quote in re.findall(r'"([^"]+)"', text):
+            if not any(quote in b for b in bodies):
+                problems.append(f"{pid}: quoted text not found in its files: {quote}")
+    return problems
+
+
 def build():
     conv = Converter()
     conv.feed(SRC.read_text(encoding="utf-8"))
@@ -168,10 +202,11 @@ def main():
     content = build()
     if "--check" in sys.argv[1:]:
         current = OUT.read_bytes().decode("utf-8") if OUT.exists() else None
+        problems = check_prompts()
         if current != content:
-            print("web/index.md is out of date. Run: python3 scripts/build-index-md.py")
-            return 1
-        return 0
+            problems.append("web/index.md is out of date. Run: python3 scripts/build-index-md.py")
+        print("\n".join(problems))
+        return 1 if problems else 0
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(content)
     return 0

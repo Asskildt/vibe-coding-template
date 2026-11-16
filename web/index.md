@@ -67,20 +67,20 @@ I want my public pages to show up well in search and look right when shared, fol
 #### Code structure
 
 ```text
-I want to review my codebase against the structure rules in github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md and rule 5 ("Short, focused files") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Then read my actual folders and imports. Report where core code imports from feature modules, where a module reaches into another module's internal files, any import cycles, folders with more than 8 to 10 files at the same level, and files over roughly 300 lines. Give me a table with path and rule broken, worst first, and propose a fix for each. Tell me which check level in structure.md fits my project size. Don't change anything until we've agreed.
+I want to review my codebase against the structure rules in github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md and rule 5 ("Short, focused files") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Then read my actual folders and imports. Report where core code imports from feature modules, where a module reaches into another module's internal files, any import cycles, folders with 10 or more files at the same level, and files over roughly 300 lines. Give me a table with path and rule broken, worst first, and propose a fix for each. Tell me which structure tier (A, B or C) in structure.md fits my project size. Don't change anything until we've agreed.
 ```
 
 #### Quarterly standards review
 
 ```text
-I want to run the quarterly standards review from github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md and https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/watchlist.md. Re-check every row in the watchlist against its primary source on the web, not from memory. Mark anything you can't confirm as unverified. Propose which rows to move between Adopted, Optional, Watching and Rejected using the switching-cost rule, with a one-line reason for each. Then search for new standards in the areas the template covers and suggest candidates. Show me the proposed changes before you edit any file.
+I want to run the quarterly standards review from github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md and https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/watchlist.md. Re-check every row in my project's copy of the watchlist (docs/standards/watchlist.md) against its primary source on the web, not from memory. Mark anything you can't confirm as unverified. Propose which rows to move between Adopted, Optional, Watching and Rejected using the switching-cost rule, with a one-line reason for each. Then search for new standards in the areas the template covers and suggest candidates. Show me the proposed changes before you edit any file in my project.
 ```
 
 ## 01 What it is
 
 Good results come from planning the work and keeping the codebase tidy, so the agent can navigate it and grasp how the system fits together. On bigger projects it also needs to know what you're building before it starts, or you burn expensive tokens on code that gets rewritten. The bigger the project, the more this pays off.
 
-What you get is plain Markdown: a short `AGENTS.md` holding the rules that apply everywhere, a planning chain for the decisions worth making up front, and decision records. Alongside sit rules for code structure (dependency direction, folder width, file length), a design system (tokens, white label brands, layout templates), accessibility and AI workflow guidance, and a quarterly routine for deciding which new standards to adopt and which to watch. Nothing to install, no dependencies, and it works with whichever agent you already use.
+What you get is plain Markdown: a short `AGENTS.md` holding the rules that apply everywhere, a planning chain for the decisions worth making up front, and decision records. Alongside sit rules for code structure (dependency direction, folder width, file length) and a design system with tokens, components and layout skeletons. Accessibility rules, AI workflow guidance and a quarterly routine for deciding which new standards to adopt and which to watch round it out. Nothing to install, no dependencies, and it works with whichever agent you already use.
 
 - The agent works from real context, not guesses, so there's less to undo.
 

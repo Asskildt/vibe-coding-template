@@ -25,6 +25,7 @@
 
 - **Stack:** {e.g. Hono + TypeScript backend, Drizzle ORM, PostgreSQL. Vue 3 + Nuxt frontend.}
 - **Goal:** {The one thing the project has to get right.}
+- **Tiers:** {Structure A | B | C} (`docs/structure.md`), {Design 1 | 2 | 3 | no UI} (`docs/design/README.md`). The two scales are independent.
 - **Status:** {Planning | early development | in production.} Be explicit whether `docs/` is *design* or *documentation of existing behavior*, so no one mistakes a plan for a fact.
 
 ---
@@ -80,6 +81,7 @@ backend/src/
 │   └── errors.ts / types.ts
 └── modules/                # Domain logic, one folder per domain
     └── {domain}/
+        ├── index.ts        # Public export, the only file other modules import
         ├── *.routes.ts     # Routes + API definitions (thin)
         ├── *.schemas.ts    # Validation (in/out)
         └── *.service.ts    # Domain logic (all db interaction)
@@ -87,7 +89,8 @@ backend/src/
 frontend/app/
 ├── layouts/                # Layouts
 ├── pages/                  # File-based routing
-├── components/ui/          # Reusable UI components
+├── components/ui/          # Primitives (Button, Input)
+├── components/patterns/    # Compositions of ui/ (FormField, DataTable)
 ├── composables/ (hooks/)   # Shared logic
 └── lib/                    # Utilities
 ```
@@ -97,9 +100,9 @@ module, not wherever is easiest. Easy to navigate for a person and an agent from
 Details and checks: `docs/structure.md`.
 
 - **Dependency direction.** `core/` never imports from `modules/`. A module imports another module only through its public export (one index file), never its internal files. No import cycles.
-- **Folder width.** At 8 to 10 files at the same level, consider grouping into subfolders by responsibility, not by type (no `utils/` or `helpers/`).
+- **Folder width.** At 10 or more files at the same level, consider grouping into subfolders by responsibility, not by type (no `utils/` or `helpers/`).
 - **Short files, few comments:** rules 5 and 6.
-- **Enforcement scales with project size** (levels A to C in `docs/structure.md`): review, then lint rules, then CI boundary checks. Recommendations, not requirements.
+- **Enforcement scales with structure tier** (A to C in `docs/structure.md`): review, then lint rules, then CI boundary checks. Recommendations, not requirements.
 
 ---
 
@@ -124,9 +127,9 @@ Moved out of this file (rule 13). Read the file when the task matches:
 
 - Before writing or reviewing code: `docs/code-style.md` (TypeScript, naming, thin routes and components, UI token rules).
 - Before writing tests, running checks, or reporting a task as done: `docs/testing.md` (test rules, Definition of Done, what not to spend time on).
-- Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (performance rules, state and immutability, agent-navigable errors).
+- Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (request flow, performance rules, state and immutability, agent-navigable errors).
 - Before creating files, folders or cross-module imports: `docs/structure.md` (dependency direction, folder width, checks by project size).
-- Before building or changing UI: `docs/design/README.md` (tiers and your system), then the file for the task: `tokens.md` (tokens, themes, brands), `components.md`, `layouts.md` (page shells), `accessibility.md`, `ai-tells.md`. Public pages also `seo.md`.
+- Before building or changing UI: `docs/design/README.md` (tiers and your system), then the file for the task: `tokens.md` (tokens, themes), `components.md`, `layouts.md` (page shells and skeletons), `accessibility.md`, `ai-tells.md`. Public pages also `seo.md`.
 - Before adopting a new standard, format or tool, and at the quarterly review: `docs/standards/README.md` (weigh by cost to switch away) and `docs/standards/watchlist.md`.
 - Before changing the database schema: `.agent/skills/migrate-database/SKILL.md` (steps and migration-pipeline traps). Only if the project has a database. The skill ships as an example: fill it in, or delete it together with this line.
 - Before putting a number, date, quote or named institution in a doc or on the site: `.agent/skills/verify-sources/SKILL.md`. Only for content-heavy or public projects.
@@ -212,7 +215,7 @@ List the real ones so the boundary is greppable, not guessed.
 
 - {Example: «Rå SQL må ligge i `drizzle/`, ellers kjører migrasjonen aldri — uten feilmelding.»}
 - Promptene i `web/index.html` viser til AGENTS.md-seksjoner og filstier ved navn. Gir du en seksjon nytt navn eller flytter en fil, slutter promptene å virke uten feilmelding. Oppdater dem i samme endring.
-  `web/index.md` er generert: kjør `scripts/build-index-md.py`, aldri rediger for hånd (pre-commit-hooken sjekker). `web/llms.txt` vedlikeholdes fortsatt for hånd og oppdateres i samme endring.
+  `web/index.md` er generert: kjør `scripts/build-index-md.py`, aldri rediger for hånd. `--check` (kjøres av pre-commit-hooken) sjekker også at stier og siterte overskrifter i promptene finnes. `web/llms.txt` vedlikeholdes fortsatt for hånd og oppdateres i samme endring.
 
 ---
 
@@ -240,17 +243,12 @@ of contents. `docs/design/` and `docs/standards/` already have their own.}
 
 - `docs/architecture.md` — layering and module structure, kept current
 - `docs/domain.md` — domain terms, abbreviations, business rules (Norwegian domain lives here)
-- `docs/code-style.md` — TypeScript, naming, thin routes and components, UI token rules
-- `docs/testing.md` — test rules, Definition of Done, what not to spend time on
-- `docs/backend.md` — performance rules, state and immutability, agent-navigable errors
 - `docs/data-model.md` — entities, relations, invariants
 - `docs/api-reference.md` — OpenAPI spec or generated docs
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
-- `docs/structure.md` — dependency direction, folder width, structure checks by project size
-- `docs/design/README.md` — design system tiers and this project's system. Next to it: `tokens.md`, `components.md`, `layouts.md`, `accessibility.md`, `seo.md`, `ai-tells.md`
-- `docs/standards/README.md` — adopting standards (weighted by switching cost), quarterly review. `watchlist.md` holds the status
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
+- Described under "Read on Demand": `docs/code-style.md`, `docs/testing.md`, `docs/backend.md`, `docs/structure.md`, `docs/design/` (with `tokens.md`, `components.md`, `layouts.md`, `accessibility.md`, `seo.md`, `ai-tells.md`), `docs/standards/` (with `watchlist.md`)
 
 **Reusable context (tool support varies — see `.agent/README.md`):**
 

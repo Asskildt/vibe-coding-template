@@ -6,6 +6,27 @@
 
 ---
 
+## Request flow
+
+One direction per request, the same in every module: route → service → database.
+
+1. **Route/handler** (`{domain}.routes`): parse and validate input with the module's schema, call
+   one service function, map the result or error to an HTTP response through the shared error
+   mapping. No domain logic, no db calls.
+2. **Service** (`{domain}.service`): domain rules and all db access. Owner-scoped queries have the
+   owner ID in `where` (see "Security" in `AGENTS.md`). Throws typed errors, never HTTP responses.
+3. **Shared error types** (`core/errors`): the typed errors every service throws, each with `code`,
+   `message` and `hint` (shape under "Error Messages Are Instructions"), and the one mapping from
+   error type to HTTP status.
+4. **Cross-cutting** (`core/middleware`, `core/config`): auth, config and logging. Modules read
+   config and the current user from `core/`, never from env vars or request headers directly.
+
+No repository layer, base classes or dependency-injection container by default. Add one when three
+concrete cases show what it must handle (rule 4). Folder layout and dependency direction:
+[`structure.md`](structure.md).
+
+---
+
 ## Performance — Concrete Rules
 
 Follow these for all new code that hits a database or renders lists.

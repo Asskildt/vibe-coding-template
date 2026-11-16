@@ -1,6 +1,6 @@
-# Design tokens, themes and brands
+# Design tokens and themes
 
-> Read when defining or changing colors, type, spacing, radii, motion, themes, or adding a brand.
+> Read when defining or changing colors, type, spacing, radii, motion or themes.
 > Tier labels refer to [`README.md`](README.md).
 
 ## Rule: no hardcoded design values
@@ -9,29 +9,21 @@ Components and pages never contain a raw color, font size, spacing, radius, shad
 z-index. They reference a token. A literal value in component code is a bug, the same way a
 hardcoded secret is. Enforce it mechanically where the stack allows (see "Enforcement").
 
-## Two independent axes
+## Modes
 
-A theme is not a brand. Keep them separate, so `brands × modes` works without writing every
-combination by hand.
+Color schemes are the `light`, `dark` and `system` modes, switched by the `data-theme` attribute
+and persisted (see "Theme support"). The semantic layer holds one value per mode for every token.
 
-| Axis | Values | Decided by | Switched by |
-|---|---|---|---|
-| **Mode** | `light`, `dark`, `system` | The user | `data-theme` attribute, persisted |
-| **Brand** (white label) | `default`, `acme`, ... | The deployment or the tenant | `data-brand` attribute, or a build-time choice |
-
-Each brand supplies a value for every semantic token in both modes. A brand that skips dark mode
-is a decision recorded in `docs/decisions/`, not a silent gap.
-
-## Three token layers (tier 2: semantic only. tier 3: all three)
+## Token layers (tier 1: one `:root` block. tier 2: primitive + semantic. tier 3: + component)
 
 Tokens reference upward, never sideways or down. A component token points to a semantic token, and
-a semantic token points to a primitive.
+a semantic token points to a primitive. Components use semantic tokens only.
 
 1. **Primitive** (raw palette and scales). `blue-500`, `space-4`, `radius-2`. Named by what it
    *is*. Components never use these directly.
 2. **Semantic** (role). `color-bg-surface`, `color-text-muted`, `color-action-primary`,
-   `color-border-focus`. Named by what it is *for*. **This layer is where modes and brands differ**:
-   `color-bg-surface` resolves to a different primitive per mode and per brand.
+   `color-border-focus`. Named by what it is *for*. **This layer is where modes differ**:
+   `color-bg-surface` resolves to a different primitive per mode.
 3. **Component** (optional, tier 3). `button-primary-bg`. Added only for a component that needs
    its own value that no semantic token expresses. Do not create one per component by default.
 
@@ -43,9 +35,9 @@ token is `--color-action-primary-hover`. One name per concept across code, desig
 - **Tier 1:** a single `:root { ... }` block of CSS custom properties in the main stylesheet.
 - **Tier 2:** `styles/tokens/` with `primitives.css`, `semantic.css`, and the mode overrides.
 - **Tier 3:** token source files in DTCG format under `tokens/` (`primitives.json`,
-  `semantic.json`, `brands/{brand}.json`), compiled to CSS custom properties by a build step. The
-  CSS is generated output: never edit it by hand, and the generated file is exempt from the length
-  rule (rule 5).
+  `semantic.json`), compiled to the same CSS custom properties by a build step. The CSS is
+  generated output: never edit it by hand, and the generated file is exempt from the length rule
+  (rule 5). Use it when the project syncs with Figma or has a design team.
 
 ### DTCG format (tier 3)
 
@@ -74,7 +66,8 @@ Once you support it, these are firm:
   without a reload (a `matchMedia` change listener).
 
 Design both modes deliberately. Dark mode is its own set of semantic values, not inverted light.
-`web/index.html` is a worked reference for this pattern. Copy from it rather than reinventing it.
+`web/index.html` and `web/styles.css` show this pattern working (tier 1). Read them as a pattern,
+not as code to copy.
 
 ## CSS baseline
 
@@ -88,15 +81,13 @@ or the layouts: they are not Baseline yet. Check the current status in
 Order styles with `@layer` (`reset, tokens, base, components, utilities`) so specificity fights
 are structural rather than ad hoc.
 
-## Adding a brand (tier 3)
+## Optional: white label
 
-1. Copy `tokens/brands/default.json` to `tokens/brands/{brand}.json`.
-2. Override semantic tokens only. If a brand needs a primitive that doesn't exist, add the
-   primitive, then alias it.
-3. Build, then check contrast for every text/background pair in both modes (see
-   [`accessibility.md`](accessibility.md)).
-4. Components and layouts stay untouched. If a brand needs a component change, that is a new
-   variant or a new semantic token, not a brand-specific fork.
+Not a default. If the project must ship several brands, override semantic tokens per brand in CSS,
+scoped by an attribute or class on `<html>`, with a value for every semantic token in both modes.
+Components and layouts stay untouched: a brand that needs a component change is a new variant or a
+new semantic token, not a fork. Check contrast for each text and background pair
+([`accessibility.md`](accessibility.md)). Record the decision in `docs/decisions/`.
 
 ## Enforcement (by tier)
 
@@ -104,6 +95,6 @@ are structural rather than ad hoc.
 |---|---|
 | 1 | Review. `grep` for hex colors outside the `:root` block |
 | 2 | A lint rule that forbids literal color, spacing and font values outside the token files (for example Stylelint `color-no-hex` and `declaration-property-value-disallowed-list`, or the stack's equivalent) |
-| 3 | Tier 2 plus a CI check that every semantic token exists in every brand and mode |
+| 3 | Tier 2 plus a CI check that every semantic token has a value in every mode |
 
 These are examples of tools that exist. Verify the name and version before adding one (rule 7).

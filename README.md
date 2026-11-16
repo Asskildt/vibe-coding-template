@@ -18,7 +18,10 @@ any code exists, scaled so a weekend script can skip it entirely.
 | **`docs/planning/`** | A 6-step planning chain (brief → stack → architecture → extension points → milestones → deploy), run *before* coding. Has a skip-it exit for small projects. |
 | **`docs/decisions/`** | ADRs: the long-term memory of *why* a choice was made, so it isn't re-litigated later. |
 | **`docs/code-style.md`** and **`docs/testing.md`** | Code style and naming, test rules and the Definition of Done. Read before writing code or reporting a task as done. |
-| **`docs/backend.md`** | Performance, state and API-error rules. Read before writing code that hits a database, renders lists or defines API responses. |
+| **`docs/backend.md`** | Request flow (route, service, core), performance, state and API-error rules. Read before writing code that hits a database, renders lists or defines API responses. |
+| **`docs/structure.md`** | Dependency direction, folder width and checks by project size. Read before creating files or crossing module boundaries. |
+| **`docs/design/`** | Design system in three tiers: tokens, components, layout shells with skeletons, accessibility, SEO. Read before building UI. |
+| **`docs/standards/`** | How new standards are adopted, weighted by cost to switch away, plus the watchlist and a quarterly review. |
 | **`docs/ai-workflow.md`** | How to work with the agent: model routing by capability class, token economy, when to drive step-by-step vs hand off a whole task, and how to delegate to subagents. |
 | **`.agent/`** | Reusable context: `skills/` (procedural knowledge, loaded on demand) and `examples/` (real code from the project). |
 | **`.github/PULL_REQUEST_TEMPLATE.md`** | A PR checklist that keeps docs in sync. The one mechanism that stops context from rotting. |
@@ -98,8 +101,8 @@ notice if you redistribute it. © 2026 M. Asskildt, asskildt.eu
 ---
 
 Landing page: <https://vibe.asskildt.eu>. It lives in `web/`, which is this repo's own site rather
-than part of the template. Don't copy it into your project, though it does serve as a worked example
-of the theme and accessibility baselines in [`docs/design/`](docs/design/README.md).
+than part of the template. Don't copy it into your project. Read it as a pattern: it is the real
+example for design tier 1 (theme, tokens, a landing page) in [`docs/design/`](docs/design/README.md).
 
 `web/index.md` is generated from `web/index.html` by `scripts/build-index-md.py`. Enable the
 pre-commit check with `git config core.hooksPath .githooks`. When you copy the template into a

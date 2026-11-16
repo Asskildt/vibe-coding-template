@@ -11,10 +11,17 @@ A handful of canonical files that answer "how do we do X in *this* project?":
 
 - `{good-route.ts}` — the shape every route/endpoint should follow.
 - `{good-service.ts}` — the service-layer pattern (all DB access, thin routes).
+- `{good-page}` and `{good-component}` — a page using a layout shell, and a `ui/` component.
 - {...whatever pattern you find yourself pointing at repeatedly.}
+
+The first real backend module and the first real page or component are the natural candidates:
+build them carefully (`docs/planning/04-milestones.md`), then add them here.
 
 ## Rules
 
+- **Specs in `docs/` are not examples.** The shell skeletons in `docs/design/layouts.md` describe
+  structure. Once the project has real shells, they replace the skeletons, and an example here
+  points to the real files.
 - **Copy from the codebase, don't write from scratch.** If it isn't running somewhere in the repo,
   it doesn't belong here.
 - **Keep it small.** Two or three exemplary files beat a folder no one reads.

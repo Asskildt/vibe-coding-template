@@ -15,6 +15,11 @@ unsure about first, so you fail cheap if it doesn't work.
 {The smallest end-to-end slice that proves the core works. Not feature-complete — just proof the
 architecture holds. What's in it?}
 
+Build the first real backend module and the first real page or component with care, strictly
+following `docs/backend.md`, `docs/structure.md` and `docs/design/`. They become the pattern every
+later module copies, so a shortcut here is repeated everywhere. When they work, copy the module's
+route and service and the page or component into `.agent/examples/` (see its README).
+
 ### Phase 2 — {core feature set}
 {The features that make it useful for the primary user from the brief.}
 

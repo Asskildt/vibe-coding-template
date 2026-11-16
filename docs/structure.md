@@ -3,9 +3,6 @@
 > Read before creating files or folders, moving code between modules, or adding an import across
 > module boundaries. The short rules are in `AGENTS.md` ("Directory Structure"). This file has the
 > detail and the checks.
->
-> - **Owner:** {name / role}
-> - **Last updated:** {YYYY-MM-DD}
 
 The goal: a person or an agent opens the repo, reads the folder names, and knows where code
 belongs and what it may depend on, without reading the code first.
@@ -38,19 +35,22 @@ modules/a   →   modules/b    only through b's public export (index file)
 
 ## Folder width
 
-When a folder has **8 to 10 files at the same level**, consider grouping by responsibility into
-subfolders. This is a prompt to look, not an automatic split. Leave a flat folder alone when the
-files really are peers (ten route files with one shared shape).
+When a folder has **10 or more files at the same level**, consider grouping by responsibility
+into subfolders. This is a prompt to look, not an automatic split. Leave a flat folder alone when
+the files really are peers (ten route files with one shared shape).
+
+- **What counts:** files directly in the folder, including tests, styles and `index` files.
+  Subfolders and generated files don't count.
 
 - Group by what the files do (`auth/`, `billing/`), not by type (`helpers/`, `utils/`, `misc/`).
   A `utils` or `helpers` folder that keeps growing is a missing module.
 - Prefer a folder per concept once a concept has three or more files (`orders.routes.ts`,
-  `orders.service.ts`, `orders.schemas.ts` become `orders/`).
+  `orders.service.ts`, `orders.schemas.ts` move into `orders/` and keep their names).
 - A folder with one file inside has no reason to exist, unless it is a module's public entry.
 - Keep nesting shallow. Past three or four levels below `src/`, the grouping is wrong.
-- Folders and files are named for what they hold, in the naming style under "Naming" in
-  `AGENTS.md`. Don't repeat the folder name in every file name below it unless the file is
-  imported by itself elsewhere.
+- Folders and files are named for what they hold, in the style under "Naming" in
+  [`code-style.md`](code-style.md). A file keeps the domain name (`orders.service.ts`, not
+  `service.ts`), so editor tabs and search results are unambiguous.
 
 ## Files stay short
 
@@ -68,22 +68,32 @@ follow the same dependency direction.
   name and file names. Don't add one by default (no unrequested artifacts).
 - Keep `docs/architecture.md` current when a module is added, removed or changes what it exposes.
 
-## Checks, by project size
+## Checks, by structure tier
 
-State the checks in the project's `AGENTS.md` setup commands. The tools below exist as of
-2026-11 (see [`standards/watchlist.md`](standards/watchlist.md)). Verify the name and version
-before adding one (rule 7). For other stacks, use the equivalent.
+Structure tier is chosen per project and recorded in `AGENTS.md` (Project Overview). It is
+independent of the design tier in [`design/README.md`](design/README.md): a large app with one
+brand can be structure C and design 2.
 
-| Level | Project | Checks |
+State the checks in the project's `AGENTS.md` setup commands. The tools below are examples:
+verify the name and version before adding one (rule 7), and see
+[`standards/watchlist.md`](standards/watchlist.md) for their status. For other stacks, use the
+equivalent.
+
+| Tier | Project | Checks |
 |---|---|---|
-| **A** | Small or static site, script, one package | Review against this file. `wc -l` on changed files. No tooling |
-| **B** | App with one backend or one frontend | Lint rules for file length (ESLint `max-lines`, or equivalent) and import restrictions (`no-restricted-imports` blocking `core → modules` and imports of another module's internal files). Run in the lint command |
-| **C** | Backend and frontend, several modules or teams | Level B plus an architecture check that fails CI on boundary violations and cycles (`eslint-plugin-boundaries` or `dependency-cruiser`), a check for unused files and exports (`knip`) to back "replace means delete", and a small script that counts files per folder and warns above 10 |
+| **A** | One small package: static site, script, tool | Review against this file. `wc -l` on changed files. No tooling |
+| **B** | One team, one app: a backend, a frontend, or both in one package | Lint rules for file length (ESLint `max-lines`, or equivalent) and import restrictions (`no-restricted-imports` blocking `core → modules` and imports of another module's internal files). Run in the lint command |
+| **C** | Several packages or several teams | Tier B plus an architecture check that fails CI on boundary violations and cycles (`eslint-plugin-boundaries` or `dependency-cruiser`), a check for unused files and exports (`knip`) to back "replace means delete", and a folder-width check |
 
-A ready-made rule for "maximum files per folder" could not be confirmed when this was researched, hence
-the script at level C. Record the chosen checks in an ADR when you adopt them.
+No ready-made rule for folder width is confirmed (listed as unverified in the watchlist). No script
+for it ships with the template. This shell one-liner lists folders at the limit and can run in CI:
 
-Checks run once in the lint step. Don't write a parallel checking harness.
+```bash
+find src -type d -exec sh -c 'n=$(find "$1" -maxdepth 1 -type f | wc -l); [ "$n" -ge 10 ] && echo "$n $1"' _ {} \;
+```
+
+Record the chosen checks in an ADR when you adopt them. Checks run once in the lint step. Don't
+write a parallel checking harness.
 
 ## When the rules and the code disagree
 

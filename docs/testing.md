@@ -2,9 +2,6 @@
 
 > Read before writing tests, running checks, or reporting a task as done. Replace the `{...}`
 > commands with the project's real ones (see "Setup Commands" in `AGENTS.md`).
->
-> - **Owner:** {name / role}
-> - **Last updated:** {YYYY-MM-DD}
 
 Don't create new test suites unprompted. Existing tests are the contract: always run them. Add a
 test when you fix a bug a test would have caught. Test behavior, not implementation details.

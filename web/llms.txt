@@ -13,9 +13,9 @@ The HTML page at https://vibe.asskildt.eu/ is canonical. The markdown version ha
 - [AGENTS.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md): Working rules, code structure, security and the index of the other files
 - [docs/code-style.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/code-style.md): TypeScript, naming, thin routes and components, UI token rules
 - [docs/testing.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/testing.md): Test rules, Definition of Done, what not to spend time on
-- [docs/backend.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md): Performance, state, agent-navigable APIs and errors
+- [docs/backend.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/backend.md): Request flow, performance, state, agent-navigable APIs and errors
 - [docs/structure.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md): Dependency direction, folder width and structure checks by project size
-- [docs/design/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design/README.md): Design system tiers, tokens and white label, components, layout shells, accessibility, SEO
+- [docs/design/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design/README.md): Design system tiers, tokens, components, layout shells with skeletons, accessibility, SEO
 - [docs/standards/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md): How new standards are adopted, weighted by switching cost, and the quarterly review
 - [docs/ai-workflow.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/ai-workflow.md): Model routing, token economy, conductor versus orchestrator, and delegating to subagents
 - [docs/planning/README.md](https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/planning/README.md): When the planning chain applies, and when to skip it

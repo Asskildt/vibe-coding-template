@@ -3,9 +3,6 @@
 > Read before writing or reviewing code. Short rules that apply to every task are in `AGENTS.md`
 > (Working Rules, "Code — Proportional Diffs"). Examples assume a TypeScript stack: adapt them to
 > yours.
->
-> - **Owner:** {name / role}
-> - **Last updated:** {YYYY-MM-DD}
 
 ## TypeScript
 - Strict mode. Avoid `any`.
@@ -28,7 +25,7 @@ Components rendered in lists receive data as props, they don't fetch it themselv
 ## UI
 *Applies only to projects with a user interface. Skip it for APIs, CLIs and libraries.*
 
-- **No hardcoded design values.** Colors, spacing, type, radii and motion come from design tokens. Brand (white label) and light/dark mode are separate axes.
+- **No hardcoded design values.** The rule and its enforcement are in `docs/design/tokens.md`.
 - **Reuse components** from `components/ui/`. Variants and sizes are props, not one-off classes.
 - **Pages use a layout shell.** No page structure, landmarks or breakpoints inside a page.
-- Scope follows project size: tiers 1 to 3 in `docs/design/README.md`.
+- Scope follows project size: design tiers 1 to 3 in `docs/design/README.md`.

@@ -33,9 +33,9 @@ Rules that follow from this:
   than leaving it out (rule 3).
 - **Adopting a tool is a dependency decision** (rule 7). Record it as an ADR in `docs/decisions/`
   with the switching cost and the date it was checked.
-- **Scale to the project.** A standard that suits a multi-brand product may be overhead for a
-  landing page. The tiers in [`../design/README.md`](../design/README.md) and the levels in
-  [`../structure.md`](../structure.md) set which apply.
+- **Scale to the project.** A standard that suits a product with a design team may be overhead for a
+  landing page. The design tiers in [`../design/README.md`](../design/README.md) and the structure
+  tiers in [`../structure.md`](../structure.md) set which apply.
 
 ## Quarterly review
 
@@ -49,8 +49,9 @@ runs this routine. Budget a few hours.
 3. **Look for what is missing.** Search for new standards in the areas the template covers:
    design tokens, CSS, accessibility, agent instruction formats, agent skills, MCP, and code-
    structure tooling. Add candidates to "Watching" with the primary source.
-4. **Apply adopted changes** to the template docs in the same change, and keep `web/index.html`,
-   `web/llms.txt` and the references in `AGENTS.md` in sync (see "Traps" in `AGENTS.md`).
+4. **Apply adopted changes** to the template docs in the same change. Keep `web/index.html`,
+   `web/llms.txt`, the file table in `README.md` and the references in `AGENTS.md` in sync (see
+   "Traps" in `AGENTS.md`), and regenerate `web/index.md` with `scripts/build-index-md.py`.
 5. **Check links and versions** quoted in the template still resolve and are current.
 6. **Update the dates** at the top of this file and in the watchlist.
 
