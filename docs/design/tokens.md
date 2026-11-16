@@ -98,3 +98,11 @@ new semantic token, not a fork. Check contrast for each text and background pair
 | 3 | Tier 2 plus a CI check that every semantic token has a value in every mode |
 
 These are examples of tools that exist. Verify the name and version before adding one (rule 7).
+
+## Migrating an existing UI
+
+Moving hardcoded values into tokens is a mechanical step. Keep it mechanical.
+
+- **A counter that only goes down.** A check counts hardcoded values (colors, spacing, font sizes) outside the token files and fails when the count rises. Lower the limit as the count drops.
+- **Move values unchanged.** Each token gets the exact value it replaces. Don't merge nearly equal colors during the move. That is a separate, later step with its own review, since it changes how the UI looks.
+- **Prove nothing changed.** A script resolves every token in every mode and compares it with the value in the old code. Every value must be identical before and after. This gives confidence without screenshots. Write it with the project's own tooling, no new dependency.

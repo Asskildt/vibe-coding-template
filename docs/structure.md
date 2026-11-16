@@ -52,11 +52,14 @@ the files really are peers (ten route files with one shared shape).
   [`code-style.md`](code-style.md). A file keeps the domain name (`orders.service.ts`, not
   `service.ts`), so editor tabs and search results are unambiguous.
 
-## Files stay short
+## Files stay cohesive
 
-Rules 5 and 6 in `AGENTS.md` apply unchanged: split around 200 lines, stay under about 300, one
-responsibility per file, comments only for *why*. Split along responsibility, and the new files
-follow the same dependency direction.
+Rules 5 and 6 in `AGENTS.md` apply unchanged: one responsibility per file, comments only for *why*.
+Line count is a signal to look, not a reason to split. Split when the part gets its own
+responsibility, is reused, or holds logic you can test alone. A split that only moves lines
+around makes more files, more imports and a bigger total. Files of ten or twenty lines with no
+responsibility of their own are a sign of that. New files follow the same dependency direction,
+and the split is weighed against folder width above.
 
 ## Readable for people and agents
 

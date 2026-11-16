@@ -38,15 +38,15 @@ These apply to every task.
 2. **Stop instead of hammering.** After two or three failed attempts at the *same* error, stop patching and diagnose the root cause. Still unsure: describe the problem and what you tried, and hand back to the user. **If you repeat the same mistake (a forgotten pattern, a broken convention), propose a docs update (`docs/` or this file), not just a fix. It is usually missing context.**
 3. **Ask, don't guess.** If a decision isn't covered by existing docs or patterns, ask rather than improvise. Never guess at domain logic, numbers, or legal requirements.
 4. **Simplicity first.** Build clean, separated modules at the lowest complexity that works. Don't introduce a generic abstraction before three concrete cases have shown what it must handle. See "Code — Proportional Diffs".
-5. **Short, focused files.** A file that does a lot gets split into smaller parts, each with one responsibility. **Length:** start splitting around 200 lines and stay under roughly 300. Not a hard limit, but long files are harder to read, review and change safely. Split along responsibilities; don't compress code or text until it becomes unclear. Generated files, lockfiles, migrations and fixtures are exempt.
+5. **Cohesive files.** Split a file when it gains something real: a separate responsibility, reuse, or logic that can be tested alone. Line count is a signal to look, not a reason to split. Around 300 lines is a rule of thumb for looking harder. Tiny files without a responsibility of their own, and a split that makes the total clearly bigger, are signs of a wrong split. Weigh it against folder width (`docs/structure.md`). Generated files, lockfiles, migrations and fixtures are exempt.
 6. **Don't over-comment.** Code reflects the current state, not history. Write comments only to explain *why* when it isn't obvious — not what the code does or "changed from X".
 7. **Don't add dependencies without clearing it first.** New libraries, frameworks, or heavy tooling get discussed first. Keep the stack small. And verify that a package, library, or API name actually exists (via the lockfile, official docs, or a quick search) before using it — language models sometimes invent plausible names that don't exist.
 8. **Keep docs in sync.** Any change that touches an API endpoint, a page, or a domain flow updates the corresponding documentation in the *same* work session. Documentation is code, not an afterthought.
 9. **English code, Norwegian domain.** Variables, functions, and comments in English. User-facing text and domain discussion in Norwegian. {Adjust if the project is fully Norwegian or fully English.}
 10. **Replace means delete.** When you replace something, delete the old version in the same change — including its tests and unused helper files. Don't leave dead code around "just in case". Git remembers what was there.
 11. **Suggest, don't perform, the irreversible.** For actions that are hard to reverse or have broad impact (deleting data, production changes, migrations against real data), the default is to suggest and ask for confirmation — not to execute. Local, reversible changes (editing files, running tests) can be done freely.
-12. **Branch workflow:** {Describe what applies — does the agent work directly on the working branch, or create feature branches? Never push to `main`/production without an explicit request. Delete this line if the project is simple enough that it doesn't matter.}
-13. **Short file, details in their own files.** Rule 5's length numbers apply here too, and this file has one more reason: every line loads in every session, and long instruction files are followed less reliably. It holds the overview and the rules that apply everywhere. Deep detail (API reference, data model, migration pipeline, domain knowledge) lives under `docs/`, linked from here. Move out sections only some tasks need and leave a pointer that says when to read them.
+12. **Branch workflow:** {Describe what applies — does the agent work directly on the working branch, or create feature branches? Never push to `main`/production without an explicit request. Suggested default for parallel agent tasks: `docs/ai-workflow.md`, "Git for agents". Delete this line if the project is simple enough that it doesn't matter.}
+13. **Short file, details in their own files.** Rule 5's size guidance applies here too, and this file has one more reason: every line loads in every session, and long instruction files are followed less reliably. It holds the overview and the rules that apply everywhere. Deep detail (API reference, data model, migration pipeline, domain knowledge) lives under `docs/`, linked from here. Move out sections only some tasks need and leave a pointer that says when to read them.
 
 ---
 
@@ -101,7 +101,7 @@ Details and checks: `docs/structure.md`.
 
 - **Dependency direction.** `core/` never imports from `modules/`. A module imports another module only through its public export (one index file), never its internal files. No import cycles.
 - **Folder width.** At 10 or more files at the same level, consider grouping into subfolders by responsibility, not by type (no `utils/` or `helpers/`).
-- **Short files, few comments:** rules 5 and 6.
+- **Cohesive files, few comments:** rules 5 and 6.
 - **Enforcement scales with structure tier** (A to C in `docs/structure.md`): review, then lint rules, then CI boundary checks. Recommendations, not requirements.
 
 ---
@@ -129,7 +129,7 @@ Moved out of this file (rule 13). Read the file when the task matches:
 - Before writing tests, running checks, or reporting a task as done: `docs/testing.md` (test rules, Definition of Done, what not to spend time on).
 - Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (request flow, performance rules, state and immutability, agent-navigable errors).
 - Before adding configuration, logging, an API endpoint or frontend data fetching: `docs/foundations.md` (config in one place, logging, API contract, server vs UI state).
-- Before creating files, folders or cross-module imports: `docs/structure.md` (dependency direction, folder width, checks by project size).
+- Before creating files, folders or cross-module imports: `docs/structure.md` (dependency direction, folder width, checks by project size). Adopting the template in an existing project: `docs/adopting.md`. Firebase or Supabase: `docs/security.md`.
 - Before building or changing UI: `docs/design/README.md` (tiers and your system), then the file for the task: `tokens.md` (tokens, themes), `components.md`, `layouts.md` (page shells and skeletons), `accessibility.md`, `ai-tells.md`. Public pages also `seo.md`.
 - Before adopting a new standard, format or tool, and at the quarterly review: `docs/standards/README.md` (weigh by cost to switch away) and `docs/standards/watchlist.md`.
 - Before changing the database schema: `.agent/skills/migrate-database/SKILL.md` (steps and migration-pipeline traps). Only if the project has a database. The skill ships as an example: fill it in, or delete it together with this line.
@@ -180,7 +180,7 @@ like this file and `docs/*`. "Writing — Precision Over Volume" applies everywh
 ## Security
 
 - **Auth:** explicit. A dev bypass requires a named flag that cannot be combined with production.
-- **Tenant/user isolation:** every `update`/`delete`/`findFirst` against a table with an owner ID has it in the `where` — even when the ID comes from an earlier scoped read. That makes the rule greppable. Prefer RLS at the database level where the platform supports it.
+- **Tenant/user isolation:** every `update`/`delete`/`findFirst` against a table with an owner ID has it in the `where` — even when the ID comes from an earlier scoped read. That makes the rule greppable. Prefer RLS at the database level where the platform supports it. With Firebase or Supabase, see `docs/security.md`.
 - **Secrets:** environment variables only, never in code. Don't echo secret values in responses.
 - **Local agent credentials:** token or credential files for agents (e.g. a dev token under `.agent/`) are gitignored before first use.
 - **CORS:** allow-list, never wildcard in production.
@@ -246,7 +246,7 @@ of contents. `docs/design/` and `docs/standards/` already have their own.}
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow
-- Described under "Read on Demand": `docs/code-style.md`, `docs/testing.md`, `docs/backend.md`, `docs/structure.md`, `docs/design/` (with `tokens.md`, `components.md`, `layouts.md`, `accessibility.md`, `seo.md`, `ai-tells.md`), `docs/standards/` (with `watchlist.md`)
+- Described under "Read on Demand": `docs/code-style.md`, `docs/testing.md`, `docs/backend.md`, `docs/structure.md`, `docs/adopting.md`, `docs/security.md`, `docs/design/` (with `tokens.md`, `components.md`, `layouts.md`, `accessibility.md`, `seo.md`, `ai-tells.md`), `docs/standards/` (with `watchlist.md`)
 
 **Reusable context (tool support varies — see `.agent/README.md`):**
 

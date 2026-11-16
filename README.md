@@ -57,12 +57,12 @@ we've agreed on the plan.
 ```text
 I have an existing project and want to adopt the conventions from
 github.com/Asskildt/vibe-coding-template where they fit. First read the conventions there,
-at least AGENTS.md, docs/design/README.md, docs/ai-workflow.md, and docs/planning/README.md. Then
-read my project properly: not just the top-level files, but the real structure, the main
+at least AGENTS.md, docs/adopting.md, docs/design/README.md, docs/ai-workflow.md, and
+docs/planning/README.md. Then read my project properly: not just the top-level files, but the real structure, the main
 modules, config, and any existing docs, so your read is grounded in how it actually works.
 Then talk it through with me: propose which conventions are worth adopting and which don't
-fit, and whether to copy files in or just borrow ideas. Don't change anything until we've
-agreed.
+fit, and whether to copy files in (including docs/decisions/) or just borrow ideas. Follow
+docs/adopting.md for the order of work. Don't change anything until we've agreed.
 ```
 
 ## How to use it

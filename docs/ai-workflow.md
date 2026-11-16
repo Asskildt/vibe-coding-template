@@ -103,6 +103,16 @@ differ and change often. These patterns don't.
 - **Parallel only when independent.** Branches that touch the same files conflict. Split by file
   or module, or run them in sequence.
 
+## Git for agents
+
+A suggested default for rule 12 in `AGENTS.md`. Replace it if the project works differently.
+
+- **One worktree per parallel task.** Each agent task that runs in parallel gets its own git worktree, so it doesn't disturb a person working in the main folder.
+- **Dependent tasks build on each other.** Branch the second task from the first and merge in order.
+- **Rebase after each merge.** The tasks still open rebase on the new `main` before they continue.
+- **Hands off other worktrees.** An agent never moves or deletes a worktree it didn't create.
+- The PR template has a checkbox for "rebased on the latest `main`".
+
 ## Verification threshold
 
 Ties directly to the Definition of Done in `docs/testing.md`. One addition specific to model routing:

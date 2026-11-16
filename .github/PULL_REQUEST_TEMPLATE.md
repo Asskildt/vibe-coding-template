@@ -14,6 +14,11 @@
 - [ ] Existing tests are green
 - [ ] No new lint errors
 - [ ] No dead code or replaced files left behind
+- [ ] Rebased on the latest `main`
+- [ ] Refactoring only: net lines without tests and translations: {+/- N}. An increase is explained in the notes.
+
+## Check visually
+{3 to 5 things for the human to look at. Agents don't take screenshots by default. Delete if there is no UI change.}
 
 ## Context upkeep
 

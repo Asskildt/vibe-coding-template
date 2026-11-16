@@ -22,6 +22,10 @@
 Routes parse input, call the service, return the result — no db calls directly in route files.
 Components rendered in lists receive data as props, they don't fetch it themselves (see `docs/backend.md`).
 
+## Refactoring and cleanup
+Cleanup normally leaves fewer lines than it found. If the count goes up, say why in the PR.
+Count lines without tests and translations.
+
 ## UI
 *Applies only to projects with a user interface. Skip it for APIs, CLIs and libraries.*
 
