@@ -22,6 +22,18 @@ them, and for each, note the one boundary or data-model choice that must hold if
 | {More user types / roles} | {?} | {A role field and one authorization checkpoint, not permission checks sprinkled everywhere.} |
 | {...} | {?} | {...} |
 
+## When the project grows
+Not built now. Each line says when it becomes relevant and where its rules go when it does. Tiers
+are the structure tiers A to C in [`../structure.md`](../structure.md).
+
+- **Queues and background jobs:** when work outlasts a request (email, import, reports). Jobs become a module under `modules/`, with a rule file in `docs/` for retries and idempotency. Typically tier B.
+- **Caching:** when a measured query or call is too slow. Rules go in `docs/backend.md` (what is cached, how it is invalidated). Measure first.
+- **Feature flags:** when you ship unfinished work to production or roll out gradually. Flags are read through `core/config`, never as ad hoc `if` checks. Rules go in `docs/foundations.md`.
+- **i18n:** when a second language is real. Copy moves to message files, one lookup function. Rules go in `docs/code-style.md`, UI side in `docs/design/`.
+- **Observability beyond logging (tracing, metrics):** when logs no longer explain slow or failing flows across services. Extends "Logging and errors" in `docs/foundations.md`, usually tier C.
+- **Multiple tenants:** when a second customer shares the system. Isolation rules already sit in "Security" in `AGENTS.md`. Add tests that prove isolation and a tenant section in `docs/data-model.md`.
+- **Event-driven architecture:** when several modules react to the same fact and direct calls form cycles. Events are a public export of the module that emits them. Record the decision as an ADR in `docs/decisions/` first.
+
 ## The rule this produces
 
 Build the simplest solution **today**, but choose interfaces and a data model that don't force a

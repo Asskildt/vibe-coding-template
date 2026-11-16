@@ -128,6 +128,7 @@ Moved out of this file (rule 13). Read the file when the task matches:
 - Before writing or reviewing code: `docs/code-style.md` (TypeScript, naming, thin routes and components, UI token rules).
 - Before writing tests, running checks, or reporting a task as done: `docs/testing.md` (test rules, Definition of Done, what not to spend time on).
 - Before writing code that hits a database or renders lists, or defines API responses and errors: `docs/backend.md` (request flow, performance rules, state and immutability, agent-navigable errors).
+- Before adding configuration, logging, an API endpoint or frontend data fetching: `docs/foundations.md` (config in one place, logging, API contract, server vs UI state).
 - Before creating files, folders or cross-module imports: `docs/structure.md` (dependency direction, folder width, checks by project size).
 - Before building or changing UI: `docs/design/README.md` (tiers and your system), then the file for the task: `tokens.md` (tokens, themes), `components.md`, `layouts.md` (page shells and skeletons), `accessibility.md`, `ai-tells.md`. Public pages also `seo.md`.
 - Before adopting a new standard, format or tool, and at the quarterly review: `docs/standards/README.md` (weigh by cost to switch away) and `docs/standards/watchlist.md`.
@@ -241,10 +242,7 @@ of contents. `docs/design/` and `docs/standards/` already have their own.}
 
 **While building (living truth):**
 
-- `docs/architecture.md` — layering and module structure, kept current
-- `docs/domain.md` — domain terms, abbreviations, business rules (Norwegian domain lives here)
-- `docs/data-model.md` — entities, relations, invariants
-- `docs/api-reference.md` — OpenAPI spec or generated docs
+- `docs/architecture.md` (layers, modules), `docs/domain.md` (terms, business rules), `docs/data-model.md`, `docs/api-reference.md` — short templates, filled in and kept current as the project grows
 - `docs/ai-workflow.md` — model routing by capability class, token economy, conductor vs orchestrator, delegating to subagents
 - `docs/decisions/` — ADRs ("why X over Y"), starting with the context-engineering source
 - `docs/traps.md` / `docs/known-limitations.md` — moved out of this file when those sections grow

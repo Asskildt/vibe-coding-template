@@ -55,7 +55,7 @@ unit is meaningless.
 - **Server state:** {React Query / useFetch / …} — cache with a sensible stale time.
 - **Global state:** {Context / Pinia / composables} — only when needed.
 - **Local state:** component-local.
-- **API contract:** standardize responses and errors. Never return raw exceptions or stack traces to the client.
+- **API contract:** standardize responses and errors. Never return raw exceptions or stack traces to the client. Single source and generation: `foundations.md`.
 
 ### Immutability (if the domain requires it)
 Data that is final or already handed out is not changed via `UPDATE`/`DELETE`.

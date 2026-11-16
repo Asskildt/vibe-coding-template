@@ -19,6 +19,7 @@ any code exists, scaled so a weekend script can skip it entirely.
 | **`docs/decisions/`** | ADRs: the long-term memory of *why* a choice was made, so it isn't re-litigated later. |
 | **`docs/code-style.md`** and **`docs/testing.md`** | Code style and naming, test rules and the Definition of Done. Read before writing code or reporting a task as done. |
 | **`docs/backend.md`** | Request flow (route, service, core), performance, state and API-error rules. Read before writing code that hits a database, renders lists or defines API responses. |
+| **`docs/foundations.md`** | Config in one place, logging and errors, one source for the API contract, server versus UI state. Read before adding config, logging, endpoints or data fetching. |
 | **`docs/structure.md`** | Dependency direction, folder width and checks by project size. Read before creating files or crossing module boundaries. |
 | **`docs/design/`** | Design system in three tiers: tokens, components, layout shells with skeletons, accessibility, SEO. Read before building UI. |
 | **`docs/standards/`** | How new standards are adopted, weighted by cost to switch away, plus the watchlist and a quarterly review. |
@@ -72,8 +73,8 @@ agreed.
    and when to skip it. A weekend script skips. Anything others will maintain goes through it.
 3. **Fill in `AGENTS.md`.** Replace the `{...}` placeholders, delete sections that don't apply, and
    set the owner/date fields. It's meant to be trimmed, not grown.
-4. **Add `docs/` files as the project needs them:** architecture, domain, data model. Don't create
-   them empty. Add each when there's something real to put in it.
+4. **Fill in the short templates in `docs/` as the project needs them:** architecture, domain, data
+   model, API reference. Delete the ones you won't use. Don't leave them as empty shells.
 5. **Keep it in sync.** The rule is simple: docs are code. A change that touches an endpoint, a
    page, or a domain flow updates the matching doc in the same session.
 
