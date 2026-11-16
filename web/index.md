@@ -37,7 +37,7 @@ I want the writing rules from github.com/Asskildt/vibe-coding-template. Read the
 #### Code discipline
 
 ```text
-I want the code discipline rules from github.com/Asskildt/vibe-coding-template. Read the section "Code — Proportional Diffs" and Working Rules 2 ("Stop instead of hammering"), 4 ("Simplicity first") and 10 ("Replace means delete") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Compare them with the instruction file I already use, then propose adding only what is missing or conflicts with mine. Don't duplicate rules I already have. Don't change anything until we've agreed.
+I want the code discipline rules from github.com/Asskildt/vibe-coding-template, then a check of my codebase against them. First, read the section "Code — Proportional Diffs" and Working Rules 2 ("Stop instead of hammering"), 4 ("Simplicity first"), 5 ("Short, focused files") and 10 ("Replace means delete") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md, and https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md. Compare them with the instruction file I already use, then propose adding only what is missing or conflicts with mine. Second, read my actual folders and imports. Report where core code imports from feature modules, where a module reaches into another module's internal files, folders with 10 or more files at the same level, and files over roughly 300 lines, worst first. Don't change anything until we've agreed.
 ```
 
 #### Fact-checking
@@ -62,18 +62,6 @@ I want to review my frontend against the design rules in github.com/Asskildt/vib
 
 ```text
 I want my public pages to show up well in search and look right when shared, following github.com/Asskildt/vibe-coding-template. Read the section "SEO and sharing (public pages)" in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design/seo.md and the "Public, content-heavy pages" part of https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/design/accessibility.md. Then check each public page: title, description, canonical URL, Open Graph tags and image, structured data, sitemap.xml, robots.txt and llms.txt. Leave pages behind login out. Give me a short table of what's missing or wrong per page, and propose fixes. Don't change anything until we've agreed.
-```
-
-#### Code structure
-
-```text
-I want to review my codebase against the structure rules in github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/structure.md and rule 5 ("Short, focused files") in https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/AGENTS.md. Then read my actual folders and imports. Report where core code imports from feature modules, where a module reaches into another module's internal files, any import cycles, folders with 10 or more files at the same level, and files over roughly 300 lines. Give me a table with path and rule broken, worst first, and propose a fix for each. Tell me which structure tier (A, B or C) in structure.md fits my project size. Don't change anything until we've agreed.
-```
-
-#### Quarterly standards review
-
-```text
-I want to run the quarterly standards review from github.com/Asskildt/vibe-coding-template. Read https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md and https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/watchlist.md. Re-check every row in my project's copy of the watchlist (docs/standards/watchlist.md) against its primary source on the web, not from memory. Mark anything you can't confirm as unverified. Propose which rows to move between Adopted, Optional, Watching and Rejected using the switching-cost rule, with a one-line reason for each. Then search for new standards in the areas the template covers and suggest candidates. Show me the proposed changes before you edit any file in my project.
 ```
 
 ## 01 What it is

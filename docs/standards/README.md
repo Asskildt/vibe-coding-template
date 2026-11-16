@@ -58,6 +58,14 @@ runs this routine. Budget a few hours.
 If a review changes a rule in the template, record the reason as an ADR when the decision is
 costly to reverse, or as a line in the watchlist when it isn't.
 
+## Prompt for the review
+
+Paste this into your agent to run the routine above.
+
+```text
+I want to run the quarterly standards review from github.com/Asskildt/vibe-coding-template. Read docs/standards/README.md and docs/standards/watchlist.md in my project. The originals are at https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/README.md and https://raw.githubusercontent.com/Asskildt/vibe-coding-template/main/docs/standards/watchlist.md. Re-check every row in the watchlist against its primary source on the web, not from memory. Mark anything you can't confirm as unverified. Propose which rows to move between Adopted, Optional, Watching and Rejected using the switching-cost rule, with a one-line reason for each. Then search for new standards in the areas the template covers and suggest candidates. Show me the proposed changes before you edit any file in my project.
+```
+
 ## Where adopted standards end up
 
 An adopted standard becomes a rule in `AGENTS.md` only if it applies to every task. Otherwise it
